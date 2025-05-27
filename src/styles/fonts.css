@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Oswald'; /* El nombre que usarás en Tailwind y CSS */
+  src: url('../assets/fonts/oswald/Oswald-Regular.ttf') format('truetype'); /* Ruta relativa al archivo CSS */
+  font-weight: normal; /* o 400 */
+  font-style: normal;
+  font-display: swap; /* Mejora la percepción de carga */
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('../assets/fonts/oswald/Oswald-Bold.ttf') format('truetype');
+  font-weight: bold; /* o 700 */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oswald';
+  src: url('../assets/fonts/oswald/Oswald-Medium.ttf') format('truetype');
+  font-weight: 500; /* o 500 */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oswald';
+  src: url('../assets/fonts/oswald/Oswald-SemiBold.ttf') format('truetype');
+  font-weight: 600; /* o 500 */
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,16 @@
+---
+interface Props {
+  icon: string;
+  iconClass?: string;
+}
+
+const { icon, iconClass } = Astro.props;
+
+const iconWithClass = iconClass 
+  ? icon.replace('<svg', `<svg class="${iconClass}"`)
+  : icon;
+---
+
+<div>
+  <Fragment set:html={iconWithClass} />
+</div>

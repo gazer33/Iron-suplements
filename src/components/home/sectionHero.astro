@@ -1,0 +1,18 @@
+---
+import Image from "astro/components/Image.astro"
+import ImageHero from "../../assets/images/iron-bg.png"
+---
+
+<section class="bg-black text-white xl:p-0 md:pb-[600px] pb-[200px]   overflow-hidden rounded-b-radius-xl ">
+
+    <div class=" xl:flex  xl:flex-row justify-center items-center ">
+        <Image alt="image hero" src={ImageHero}  class="xl:max-h-[120vh] 2xl:max-h-[70vh] w-auto xl:opacity-100 opacity-40 "/>
+    <div class=" flex flex-col  items-center    xl:max-w-[50%] gap-10 xl:mt-0 mt-[-400px] md:mt-[-800px] relative z-40  ">
+            <h2 class="lg:text-[90px] lg:max-w-[50%] xl:max-w-[100%]  text-display-mobile-12 md:text-display-10 leading-106 text-center  font-oswald  font-bold "> ALIMENTA TU RENDIMIENTO</h2>
+<button class="bg-yellow-400 text-black xl:text-display-9 text-display-6 md:text-display-9 font-mid p-3 rounded-radius-xs font-oswald transition-all hover:text-yellow-400 hover:bg-black hover:opacity-90 hover:border-[4px] border-yellow-400">
+    Descubre Nuestros Productos
+</button>
+    </div>
+    </div>
+
+</section>

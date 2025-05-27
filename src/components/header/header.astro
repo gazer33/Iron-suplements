@@ -1,0 +1,65 @@
+---
+import Icon from "../icon/icons.astro"
+import HamburgerMenu from "../../assets/icons/hamburger-icon.svg?raw"
+---
+
+<nav class="bg-black text-white relative">
+    <div class="flex justify-between px-10 py-5 items-center">
+        <h2 class="text-display-9 font-mono text-yellow-300 font-mid">
+            logo
+        </h2>
+
+        <ul class="hidden gap-10 text-display-6 font-medium xl:flex">
+            <li class="hover:opacity-70 hover:transition-all cursor-pointer">Home</li>
+            <li class="hover:opacity-70 hover:transition-all cursor-pointer">Products</li>
+            <li class="hover:opacity-70 hover:transition-all cursor-pointer">About</li>
+            <li class="hover:opacity-70 hover:transition-all cursor-pointer">Contact</li>
+        </ul>
+
+        <div class="xl:hidden">
+            <button id="hamburger-button" aria-label="Abrir menú" aria-expanded="false" class="focus:outline-none z-20">
+                <Icon icon={HamburgerMenu} iconClass="hover:opacity-55 transition-all w-6 h-6 text-white" />
+            </button>
+        </div>
+    </div>
+
+    {/* Menú Móvil Desplegable */}
+    <div
+        id="mobile-menu"
+        class="
+            xl:hidden absolute top-full left-0 w-full bg-black z-50
+            opacity-0 -translate-y-4 pointer-events-none <!-- Estado inicial: invisible, desplazado, no interactuable -->
+            transition-all duration-300 ease-in-out   reltive   <!-- Clases de transición -->
+        "
+    >
+        <ul class="flex flex-col items-center gap-4 py-5 text-display-6 font-medium">
+            <li class="hover:opacity-70 hover:transition-all cursor-pointer py-2">Home</li>
+            <li class="hover:opacity-70 hover:transition-all cursor-pointer py-2">Products</li>
+            <li class="hover:opacity-70 hover:transition-all cursor-pointer py-2">About</li>
+            <li class="hover:opacity-70 hover:transition-all cursor-pointer py-2">Contact</li>
+        </ul>
+    </div>
+</nav>
+
+<script>
+    const hamburgerButton = document.getElementById('hamburger-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (hamburgerButton && mobileMenu) {
+        hamburgerButton.addEventListener('click', () => {
+            const isExpanded = hamburgerButton.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+                // Cerrar menú
+                mobileMenu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+                mobileMenu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                hamburgerButton.setAttribute('aria-expanded', 'false');
+            } else {
+                // Abrir menú
+                mobileMenu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+                mobileMenu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                hamburgerButton.setAttribute('aria-expanded', 'true');
+            }
+        });
+    }
+</script>

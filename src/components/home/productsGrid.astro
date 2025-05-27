@@ -1,0 +1,56 @@
+---
+import Image from "astro/components/Image.astro"
+import Creatina from "../../assets/images/creatine.png"
+import Proteina from "../../assets/images/protein.png"
+import Preentreno from "../../assets/images/pre.png"
+import Bcaa from "../../assets/images/bcaa.png"
+const Grid = [
+ {   id:1,
+    image: Proteina ,
+    description: "Proteina"
+},
+ {   id:2,
+    image: Creatina ,
+    description: "Creatina"
+},
+ {   id:3,
+    image: Bcaa ,
+    description: "BCAA"
+},
+ {   id:4,
+    image: Proteina ,
+    description: "Proteina"
+},
+ {   id:5,
+    image: Preentreno ,
+    description: "Pre entreno"
+},
+ {   id:6,
+    image: Creatina ,
+    description: "Creatina"
+},
+]
+
+---
+
+<section class="xl:py-sections-xs py-sections-mobile-small flex flex-col ">
+<div class="flex flex-col items-center justify-center gap-10">
+    <h2 class="md:text-display-11 text-display-mobile-10  font-oswald font-semibold">Productos Populares</h2>
+
+    <div  class=" grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-11  gap-x-80   w-full px-40 ">
+
+    {Grid.map((product) => (
+        <div class="flex flex-col justify-center items-center text-center ">
+        <div class="bg-yellow-500 hover:bg-black transition-all cursor-pointer w-[350px]   lg:w-[400px] 2xl:w-[500px] items-center flex justify-center rounded-radius-lg">
+            <Image alt={product.description} src={product.image} class="xl:h-[50vh] h-[40vh] md:h-[50vh]  w-auto"/>
+        </div>
+        <h3 class="text-display-10 font-oswald font-medium">{product.description}</h3>
+        </div>
+    ))}
+</div>
+</div>
+
+
+
+
+</section>
