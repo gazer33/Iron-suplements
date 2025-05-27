@@ -1,0 +1,59 @@
+---
+import Image from "astro/components/Image.astro"
+import Abc from "../../assets/images/abc.png"
+import Adn from "../../assets/images/adn.png"
+import Molecula from "../../assets/images/molecula.png"
+const cards = [
+    {
+id: 1 ,
+image: Abc,
+title: "creatina monohidratada",
+description: "Un suplemento probado que mejora el rendimiento y aumenta la fuerza",
+class: "rotate-[-3deg] lg:rotate-[0deg] lg:py-10",
+    },
+       {
+id: 2 ,
+image: Adn,
+title: "aminoacidos de cadena ramificada (BCAA)",
+description: "Favorecen la recuperación muscular y reducen el dolor despues del ejercicio",
+class: "rotate-[3deg] lg:mt-0 mt-[-35px] lg:rotate-[0deg] lg:py-10",
+
+    },
+       {
+id: 3 ,
+image: Molecula,
+title: "vitaminas esenciales",
+description: "Compuestos necesarios para la salud general y el bienestar.",
+class: "rotate-[-3deg] mt-[-35px] lg:mt-0 lg:rotate-[0deg] ",
+
+    },
+]
+---
+
+<section class=" bg-[#161818] py-sections-xxs rounded-radius-lg">
+    <div class="flex flex-col justify-center items-center text-center gap-10">
+     <div class="text-white  flex flex-col justify-center items-center gap-5">
+        <h2 class="xl:text-display-12 text-display-9 font-oswald font-mid max-w-[700px] leading-116 ">LA CIENCIA DETRÁS DE TUS SUPLEMENTOS</h2>
+        <p class="px-10 md:px-40 lg:px-10 xl:px-0  lg:text-display-6 text-display-5 font-serif font-medium max-w-[700px]" >Aquí exploramos la investigacion y los mecanismos detrás de los ingredientes
+clave que encuentras en nuestros productos, para que tomes decisiónes
+informadas sobre tu suplementaciön.</p>
+     </div>
+ <div class="xl:px-32 px-10 md:px-40 lg:px-10   flex flex-col gap-10 max-w-container-treatments">
+ <div class="bg-[#fdee28] w-full h-[2px] rounded-radius-sm">.</div>
+<div class="flex lg:flex-row flex-col gap-10">
+{cards.map((card) => (
+<div class={`bg-[#feca25] rounded-radius-lg flex flex-col justify-center items-center xl:px-10 px-10 lg:px-10  xl:py-5 py-8 lg:py-0 ${card.class}`} key={card.id}>
+    <h3 class="font-oswald xl:text-display-9  text-display-mobile-9 font-mid uppercase leading-106">{card.title}</h3>
+<Image alt={card.title} src={card.image}  class="max-w-[200px] " />
+<div class="flex flex-col gap-4 justify-center items-center">
+<p class="text-display-5 font-medium">{card.description}</p>
+<button class="text-display-6 md:text-display-8 xl:text-display-9  font-oswald border-[2px] border-black  py-1 px-6 rounded-radius-sm transition-all hover:text-[#feca25] hover:bg-black ">
+    Descrube más
+</button>
+</div>
+</div>
+))}
+</div>
+ </div>
+    </div>
+</section>
