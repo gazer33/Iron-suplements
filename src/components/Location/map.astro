@@ -1,0 +1,38 @@
+---
+const { lat, lng, zoom = 15 } = Astro.props;
+const apiKey = import.meta.env.GOOGLE_MAPS_KEY;
+const mapId = 'd05ef6bb6882721f96d34d72 ';          // ← pega el que generaste
+---
+
+<div style="height:340px;border-radius:16px;overflow:hidden;">
+  <div id="gmap" style="height:100%;width:100%"></div>
+</div>
+
+<script is:inline define:vars={{ lat, lng, zoom, mapId }}>
+  window.initMap = () => {
+    const center = { lat, lng };
+
+    const map = new google.maps.Map(document.getElementById('gmap'), {
+      center,
+      zoom,
+      mapId          // ← solo esto, sin styles:
+    });
+
+    const pin = new google.maps.marker.PinElement({
+      background: '#FACC15',
+      borderColor: '#CA8A04',
+      glyphColor: '#000'
+    });
+
+    new google.maps.marker.AdvancedMarkerElement({
+      map,
+      position: center,
+      content: pin.element
+    });
+  };
+</script>
+
+<script
+  src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&libraries=marker`}
+  async defer>
+</script>
