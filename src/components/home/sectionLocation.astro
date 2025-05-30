@@ -2,9 +2,22 @@
 import Map from '../../components/Location/map.astro'
 ---
 
-<section class="py-sections-xxs">
+<section class="bg-[#ffffff] rounded-radius-lg ">
+    <div class="  flex flex-col justify-center items-center">
+<h2 class=" text-[#fff] font-oswald text-display-12 font-bold">Encuéntranos</h2>
+<div class="border-[4px] border-[#1b1e1e] w-full grid grid-cols-2 gap-x-5 bg-[#111315] max-w-[60%] p-space-10 rounded-radius-xl">
     <div class="">
-
-<Map lat={19.604105138604858} lng={-99.22363568834344} zoom={20} />
+<Map lat={19.604105138604858} lng={-99.22363568834344} zoom={17} />
 </div>
+<div class="text-[#d7dfe3] w-full flex   flex-col gap-7 text-display-8 font-semibold">
+    <h3 class="text-white text-display-11 font-oswald">Avenida Mirasol</h3>
+    <p> El Jaral, CP 52929 </p>
+    <p>+52 55 3809 6134</p>
+    <p>info@suplements.com</p>
+
+    <button class="bg-[#fec623] text-black uppercase mt-space-6 mx-6 py-5 rounded-radius-md font-oswald font-regular">cómo llegar</button>
+</div>
+</div>
+</div>
+
 </section>
