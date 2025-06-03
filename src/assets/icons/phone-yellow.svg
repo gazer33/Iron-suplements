@@ -1,0 +1,4 @@
+<!-- Teléfono -->
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="#EFD202" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.11 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.98.45 1.93.97 2.79a2 2 0 0 1-.45 2.52L8.09 10.91a16 16 0 0 0 6 6l1.88-1.88a2 2 0 0 1 2.52-.45 12.32 12.32 0 0 0 2.79.97A2 2 0 0 1 22 16.92z"/>
+</svg>

@@ -1,23 +1,47 @@
 ---
 import Map from '../../components/Location/map.astro'
+import Image from 'astro/components/Image.astro'
+import ImageGroup from '../../assets/images/image-location-group.png'
+import Icons from '../icon/icons.astro'
+import locationIcon from '../../assets/icons/location-yellow.svg?raw'
+import MailIcon from '../../assets/icons/mail-yellow.svg?raw'
+import PhoneIcon from '../../assets/icons/phone-yellow.svg?raw'
 ---
 
-<section class="bg-[#ffffff] rounded-radius-lg ">
-    <div class="  flex flex-col justify-center items-center">
-<h2 class=" text-[#fff] font-oswald text-display-12 font-bold">Encuéntranos</h2>
-<div class="border-[4px] border-[#1b1e1e] w-full grid grid-cols-2 gap-x-5 bg-[#111315] max-w-[60%] p-space-10 rounded-radius-xl">
-    <div class="">
-<Map lat={19.604105138604858} lng={-99.22363568834344} zoom={17} />
-</div>
-<div class="text-[#d7dfe3] w-full flex   flex-col gap-7 text-display-8 font-semibold">
-    <h3 class="text-white text-display-11 font-oswald">Avenida Mirasol</h3>
-    <p> El Jaral, CP 52929 </p>
-    <p>+52 55 3809 6134</p>
-    <p>info@suplements.com</p>
+<section class="bg-[#161818] flex items-center flex-col font-oswald   justify-center py-sections-xxs rounded-b-[32px] gap-space-8">
+    <div class="max-w-container-treatments text-center flex items-center justify-center flex-col md:px-[30px]   ">
+<h2 class="text-gray-200 md:text-display-9 text-display-6">Suplementos premium a tu alcance</h2>
+<h3 class="text-gray-200 md:text-display-12 text-display-10 font-bold xl:max-w-[100%] md:max-w-[100%] max-w-[80%] lg:max-w-[70%] leading-116">Encuentra tu fuerza cerca de ti</h3>
+    </div>
 
-    <button class="bg-[#fec623] text-black uppercase mt-space-6 mx-6 py-5 rounded-radius-md font-oswald font-regular">cómo llegar</button>
-</div>
-</div>
-</div>
+    <div class="flex xl:flex-row flex-col-reverse gap-4 xl:px-[60px] mx-[30px]  ">
+        <div class="rounded-radius-md border-[3px] pb-space-5 border-[#9d9c9c] xl:max-w-[40%] ">
+            <Image src={ImageGroup} alt="image" class="object-cover rounded-t-radius-md" />
+            <div class="text-white flex flex-col  gap-8  ">
+                <h3 class="text-display-10 text-center ">Iron Supplements Premium</h3>
+                 <ul class="font-thin md:text-display-8 text-display-7 pl-[30px] text-[#e7e0e0]"> 
+                <li class="flex flex-row gap-2 items-center">
+                    <Icons icon={locationIcon}  />
+                    Av. Mirasol, Jaral, Atizapan de Zaragoza
+                </li>
+                <li class="flex flex-row gap-2 items-center">
+                    <Icons icon={MailIcon}  />
+                   
+                    ironSupplements@contact.com
+                </li>
+                <li class="flex flex-row gap-2 items-center">
+                    <Icons icon={PhoneIcon}  />
 
+                    +52 55 4345 5565
+                </li>
+            </ul>
+                <p class="ml-[50px] lg:text-display-8 text-display-7 font-oswald text-[#767575]">Abierto de Martes a Domingo de 9:00 am a 8:00 pm </p>
+
+            </div>
+        </div>
+        <div class="xl:max-w-[70%] w-[100%] rounded-[12px] ">
+            <Map lat={19.604105138604858} lng={-99.22363568834344} zoom={17} />
+           
+        </div>
+    </div>
 </section>
