@@ -1,0 +1,37 @@
+---
+import Image from "astro/components/Image.astro"
+import ImageHero from "../../assets/images/iron-bg.png"
+---
+
+<section class="bg-black text-white xl:p-0 md:pb-[600px] pb-[200px] overflow-hidden rounded-b-radius-xl pt-20 md:pt-24 relative">
+  <div class="xl:flex xl:flex-row justify-center items-center">
+    <Image
+      alt="Iron Supplements - Suplementos Deportivos Premium"
+      src={ImageHero}
+      class="xl:max-h-[120vh] 2xl:max-h-[70vh] w-auto xl:opacity-100 opacity-40"
+      loading="eager"
+    />
+    <div class="flex flex-col items-center xl:max-w-[50%] gap-6 md:gap-10 xl:mt-0 mt-[-400px] md:mt-[-800px] relative z-40 px-4">
+      <h1 class="hero-title lg:text-[90px] lg:max-w-[50%] xl:max-w-[100%] text-display-mobile-12 md:text-display-10 leading-106 text-center font-oswald font-bold">
+        ALIMENTA TU RENDIMIENTO
+      </h1>
+      <p class="text-display-6 md:text-display-8 text-gray-300 text-center max-w-2xl px-4">
+        Suplementos deportivos premium para alcanzar tu máximo potencial. Calidad garantizada, resultados comprobados.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4">
+        <a
+          href="/programs"
+          class="hero-button bg-yellow-400 text-black text-display-7 md:text-display-9 font-mid px-6 md:px-8 py-3 md:py-4 rounded-radius-sm font-oswald transition-all hover:bg-yellow-300 hover:scale-105 text-center"
+        >
+          Descubre Nuestros Productos
+        </a>
+        <a
+          href="/contact"
+          class="hero-button border-2 border-yellow-400 text-yellow-400 text-display-7 md:text-display-9 font-mid px-6 md:px-8 py-3 md:py-4 rounded-radius-sm font-oswald transition-all hover:bg-yellow-400 hover:text-black text-center"
+        >
+          Contáctanos
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

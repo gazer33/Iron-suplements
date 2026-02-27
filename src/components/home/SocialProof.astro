@@ -1,0 +1,47 @@
+---
+const stats = [
+  {
+    number: "5000+",
+    label: "Clientes Satisfechos",
+    icon: "👥"
+  },
+  {
+    number: "100%",
+    label: "Productos Originales",
+    icon: "✓"
+  },
+  {
+    number: "8+",
+    label: "Años de Experiencia",
+    icon: "🏆"
+  },
+  {
+    number: "4.9",
+    label: "Calificación Promedio",
+    icon: "⭐"
+  }
+];
+---
+
+<section class="py-16 md:py-20 bg-yellow-400" id="social-proof">
+  <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      {stats.map((stat, index) => (
+        <div
+          class="stat-item text-center"
+          data-index={index}
+        >
+          <div class="text-4xl md:text-5xl mb-2">
+            {stat.icon}
+          </div>
+          <div class="font-oswald font-bold text-display-10 md:text-display-11 text-black mb-2">
+            {stat.number}
+          </div>
+          <div class="text-display-5 md:text-display-6 text-gray-800 font-medium">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

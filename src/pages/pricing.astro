@@ -1,0 +1,270 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/header/Header.astro';
+import Footer from '../components/footer/Footer.astro';
+import '../styles/global.css';
+import '../styles/fonts.css';
+
+const pricingPlans = [
+  {
+    name: "Plan Básico",
+    price: "Desde $599",
+    period: "por mes",
+    description: "Ideal para quienes comienzan su camino fitness",
+    features: [
+      "1 producto a elegir",
+      "Asesoría básica de uso",
+      "10% descuento en compras",
+      "Acceso a contenido educativo"
+    ],
+    popular: false
+  },
+  {
+    name: "Plan Pro",
+    price: "Desde $1,299",
+    period: "por mes",
+    description: "Para atletas serios que buscan resultados",
+    features: [
+      "2-3 productos complementarios",
+      "Asesoría nutricional personalizada",
+      "15% descuento en compras",
+      "Plan de suplementación diseñado",
+      "Seguimiento mensual",
+      "Prioridad en nuevos productos"
+    ],
+    popular: true
+  },
+  {
+    name: "Plan Elite",
+    price: "Desde $2,499",
+    period: "por mes",
+    description: "Máximo rendimiento y transformación total",
+    features: [
+      "Línea completa de suplementos",
+      "Asesoría nutricional y deportiva",
+      "20% descuento en todas las compras",
+      "Plan de suplementación avanzado",
+      "Seguimiento semanal personalizado",
+      "Acceso prioritario a expertos",
+      "Análisis de composición corporal",
+      "Ajustes de plan ilimitados"
+    ],
+    popular: false
+  }
+];
+
+const guarantees = [
+  {
+    icon: "✓",
+    title: "100% Originales",
+    description: "Todos nuestros productos son auténticos y certificados"
+  },
+  {
+    icon: "🚚",
+    title: "Envío Incluido",
+    description: "Entrega a domicilio en 24-48hrs sin costo adicional"
+  },
+  {
+    icon: "🔄",
+    title: "Cambios Fáciles",
+    description: "Si no te convence, lo cambiamos sin problema"
+  },
+  {
+    icon: "💳",
+    title: "Pago Seguro",
+    description: "Múltiples métodos de pago y transacciones protegidas"
+  }
+];
+---
+
+<BaseLayout
+  title="Precios y Planes - Iron Supplements"
+  description="Descubre nuestros planes de suplementación y precios. Opciones para todos los niveles con asesoría personalizada incluida."
+>
+  <Header />
+
+  <main class="pt-20 md:pt-24">
+    <!-- Hero Section -->
+    <section class="bg-black text-white py-20 md:py-32">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10 text-center">
+        <h1 class="text-display-mobile-11 md:text-display-12 font-oswald font-bold mb-6 leading-106 animate-section">
+          Planes y Precios
+        </h1>
+        <p class="text-display-6 md:text-display-8 text-gray-300 max-w-3xl mx-auto">
+          Elige el plan que mejor se adapte a tus objetivos y presupuesto
+        </p>
+      </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="py-sections-xs bg-white">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-cards">
+          {pricingPlans.map((plan, index) => (
+            <div
+              class={`card-item relative bg-gray-50 rounded-radius-lg p-8 hover:shadow-2xl transition-all ${plan.popular ? 'ring-4 ring-yellow-400 scale-105' : ''}`}
+              data-index={index}
+            >
+              {plan.popular && (
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span class="bg-yellow-400 text-black text-display-4 font-bold px-4 py-2 rounded-full">
+                    MÁS POPULAR
+                  </span>
+                </div>
+              )}
+
+              <div class="text-center mb-6 pt-2">
+                <h2 class="text-display-9 md:text-display-10 font-oswald font-bold text-black mb-2">
+                  {plan.name}
+                </h2>
+                <p class="text-display-5 text-gray-600 mb-4">
+                  {plan.description}
+                </p>
+                <div class="mb-2">
+                  <span class="text-display-11 md:text-display-12 font-oswald font-bold text-black">
+                    {plan.price}
+                  </span>
+                </div>
+                <span class="text-display-5 text-gray-500">
+                  {plan.period}
+                </span>
+              </div>
+
+              <ul class="space-y-4 mb-8">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-yellow-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-display-5 text-gray-700">
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="/contact"
+                class={`block text-center text-display-6 md:text-display-7 font-oswald font-mid px-6 py-4 rounded-radius-sm transition-all ${
+                  plan.popular
+                    ? 'bg-yellow-400 text-black hover:bg-black hover:text-yellow-400 border-2 border-transparent hover:border-yellow-400'
+                    : 'border-2 border-gray-300 text-gray-700 hover:border-yellow-400 hover:text-black'
+                }`}
+              >
+                Comenzar Ahora
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-12 text-center">
+          <p class="text-display-6 text-gray-600 mb-4">
+            ¿No encuentras el plan adecuado? Contáctanos para un plan personalizado
+          </p>
+          <a
+            href="/contact"
+            class="inline-block text-yellow-600 hover:text-yellow-700 font-semibold text-display-6 underline"
+          >
+            Solicitar Plan Personalizado
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guarantees Section -->
+    <section class="py-20 bg-gray-50 animate-section">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+        <div class="text-center mb-12">
+          <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-4">
+            Nuestras Garantías
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {guarantees.map((guarantee) => (
+            <div class="text-center">
+              <div class="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="text-3xl">{guarantee.icon}</span>
+              </div>
+              <h3 class="font-oswald font-bold text-display-7 text-black mb-2">
+                {guarantee.title}
+              </h3>
+              <p class="text-display-5 text-gray-600">
+                {guarantee.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white animate-section">
+      <div class="max-w-4xl mx-auto px-4 md:px-10">
+        <div class="text-center mb-12">
+          <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-4">
+            Preguntas Frecuentes sobre Precios
+          </h2>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-gray-50 p-6 rounded-radius-md">
+            <h3 class="font-oswald font-bold text-display-7 text-black mb-2">
+              ¿Puedo cancelar en cualquier momento?
+            </h3>
+            <p class="text-display-5 text-gray-600">
+              Sí, no hay contratos de permanencia. Puedes ajustar o cancelar tu plan cuando lo desees.
+            </p>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-radius-md">
+            <h3 class="font-oswald font-bold text-display-7 text-black mb-2">
+              ¿Aceptan pagos mensuales?
+            </h3>
+            <p class="text-display-5 text-gray-600">
+              Sí, ofrecemos opciones de pago mensual, trimestral y anual. Los pagos trimestrales y anuales tienen descuentos adicionales.
+            </p>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-radius-md">
+            <h3 class="font-oswald font-bold text-display-7 text-black mb-2">
+              ¿Qué métodos de pago aceptan?
+            </h3>
+            <p class="text-display-5 text-gray-600">
+              Aceptamos tarjetas de crédito/débito, transferencias bancarias, PayPal y pagos en efectivo en nuestra tienda.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-black text-white">
+      <div class="max-w-4xl mx-auto px-4 md:px-10 text-center">
+        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold mb-6">
+          ¿Listo para comenzar?
+        </h2>
+        <p class="text-display-6 md:text-display-8 text-gray-300 mb-8">
+          Contáctanos hoy y recibe una consulta gratuita con nuestros expertos
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-mid px-8 py-4 rounded-radius-sm transition-all hover:bg-yellow-300"
+        >
+          Consulta Gratuita
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    import { initScrollAnimations } from '../utils/animations';
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrollAnimations);
+    } else {
+      initScrollAnimations();
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,299 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/header/Header.astro';
+import Footer from '../components/footer/Footer.astro';
+import Icon from '../components/icon/icons.astro';
+import locationIcon from '../assets/icons/location-yellow.svg?raw';
+import MailIcon from '../assets/icons/mail-yellow.svg?raw';
+import PhoneIcon from '../assets/icons/phone-yellow.svg?raw';
+import '../styles/global.css';
+import '../styles/fonts.css';
+
+const contactMethods = [
+  {
+    icon: PhoneIcon,
+    title: "Teléfono",
+    value: "+52 55 4345 5565",
+    link: "tel:+525543455565"
+  },
+  {
+    icon: MailIcon,
+    title: "Email",
+    value: "ironSupplements@contact.com",
+    link: "mailto:ironSupplements@contact.com"
+  },
+  {
+    icon: locationIcon,
+    title: "Dirección",
+    value: "Av. Mirasol, Jaral, Atizapán de Zaragoza",
+    link: "#map"
+  }
+];
+---
+
+<BaseLayout
+  title="Contacto - Iron Supplements"
+  description="Contáctanos para asesoría personalizada en suplementación deportiva. Visítanos en Atizapán de Zaragoza o llámanos al +52 55 4345 5565"
+>
+  <Header />
+
+  <main class="pt-20 md:pt-24">
+    <!-- Hero Section -->
+    <section class="bg-black text-white py-20 md:py-32">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10 text-center">
+        <h1 class="text-display-mobile-11 md:text-display-12 font-oswald font-bold mb-6 leading-106 animate-section">
+          Contáctanos
+        </h1>
+        <p class="text-display-6 md:text-display-8 text-gray-300 max-w-3xl mx-auto">
+          ¿Tienes preguntas? Nuestro equipo está listo para ayudarte a alcanzar tus objetivos
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section class="py-16 bg-white animate-section">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-cards">
+          {contactMethods.map((method, index) => (
+            <a
+              href={method.link}
+              class="card-item group bg-gray-50 p-8 rounded-radius-lg hover:shadow-xl transition-all text-center"
+              data-index={index}
+            >
+              <div class="flex justify-center mb-4">
+                <div class="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Icon icon={method.icon} iconClass="w-8 h-8" />
+                </div>
+              </div>
+              <h3 class="font-oswald font-bold text-display-8 text-black mb-2">
+                {method.title}
+              </h3>
+              <p class="text-display-5 md:text-display-6 text-gray-600 group-hover:text-yellow-600 transition-colors">
+                {method.value}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form & Info -->
+    <section class="py-sections-xs bg-gray-50">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Contact Form -->
+          <div class="animate-section">
+            <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-6">
+              Envíanos un Mensaje
+            </h2>
+            <form class="space-y-6" id="contact-form">
+              <div>
+                <label for="name" class="block text-display-6 font-semibold text-gray-700 mb-2">
+                  Nombre Completo *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5"
+                  placeholder="Tu nombre"
+                />
+              </div>
+
+              <div>
+                <label for="email" class="block text-display-6 font-semibold text-gray-700 mb-2">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5"
+                  placeholder="tu@email.com"
+                />
+              </div>
+
+              <div>
+                <label for="phone" class="block text-display-6 font-semibold text-gray-700 mb-2">
+                  Teléfono
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5"
+                  placeholder="+52 55 1234 5678"
+                />
+              </div>
+
+              <div>
+                <label for="subject" class="block text-display-6 font-semibold text-gray-700 mb-2">
+                  Asunto *
+                </label>
+                <select
+                  id="subject"
+                  name="subject"
+                  required
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5"
+                >
+                  <option value="">Selecciona un tema</option>
+                  <option value="asesoría">Asesoría Personalizada</option>
+                  <option value="productos">Información de Productos</option>
+                  <option value="precios">Precios y Planes</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message" class="block text-display-6 font-semibold text-gray-700 mb-2">
+                  Mensaje *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows="5"
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5 resize-none"
+                  placeholder="Cuéntanos cómo podemos ayudarte..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-yellow-400 text-black text-display-7 md:text-display-8 font-oswald font-mid py-4 rounded-radius-sm transition-all hover:bg-black hover:text-yellow-400 border-2 border-transparent hover:border-yellow-400"
+              >
+                Enviar Mensaje
+              </button>
+
+              <p class="text-display-4 text-gray-500 text-center">
+                * Campos requeridos
+              </p>
+            </form>
+          </div>
+
+          <!-- Info & Hours -->
+          <div class="space-y-8">
+            <div class="animate-section">
+              <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-6">
+                Información
+              </h2>
+              <div class="bg-white p-8 rounded-radius-lg space-y-6">
+                <div>
+                  <h3 class="font-oswald font-bold text-display-7 text-black mb-3">
+                    Horario de Atención
+                  </h3>
+                  <ul class="space-y-2 text-display-5 text-gray-600">
+                    <li class="flex justify-between">
+                      <span class="font-semibold">Martes - Viernes:</span>
+                      <span>9:00 AM - 8:00 PM</span>
+                    </li>
+                    <li class="flex justify-between">
+                      <span class="font-semibold">Sábado - Domingo:</span>
+                      <span>10:00 AM - 6:00 PM</span>
+                    </li>
+                    <li class="flex justify-between">
+                      <span class="font-semibold">Lunes:</span>
+                      <span class="text-red-600">Cerrado</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="pt-6 border-t border-gray-200">
+                  <h3 class="font-oswald font-bold text-display-7 text-black mb-3">
+                    Visítanos
+                  </h3>
+                  <p class="text-display-5 text-gray-600 mb-4">
+                    Av. Mirasol, Jaral<br/>
+                    Atizapán de Zaragoza<br/>
+                    Estado de México
+                  </p>
+                  <a
+                    href="#map"
+                    class="inline-block text-yellow-600 hover:text-yellow-700 font-semibold text-display-5 underline"
+                  >
+                    Ver en el mapa
+                  </a>
+                </div>
+
+                <div class="pt-6 border-t border-gray-200">
+                  <h3 class="font-oswald font-bold text-display-7 text-black mb-3">
+                    Síguenos
+                  </h3>
+                  <div class="flex gap-4">
+                    <a
+                      href="#"
+                      aria-label="Facebook"
+                      class="w-12 h-12 rounded-full bg-gray-200 hover:bg-yellow-400 flex items-center justify-center transition-all"
+                    >
+                      <span class="text-xl">f</span>
+                    </a>
+                    <a
+                      href="#"
+                      aria-label="Instagram"
+                      class="w-12 h-12 rounded-full bg-gray-200 hover:bg-yellow-400 flex items-center justify-center transition-all"
+                    >
+                      <span class="text-xl">ig</span>
+                    </a>
+                    <a
+                      href="#"
+                      aria-label="WhatsApp"
+                      class="w-12 h-12 rounded-full bg-gray-200 hover:bg-yellow-400 flex items-center justify-center transition-all"
+                    >
+                      <span class="text-xl">wa</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="map" class="py-16 bg-white">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-8 text-center">
+          Encuéntranos Aquí
+        </h2>
+        <div class="rounded-radius-lg overflow-hidden h-96 bg-gray-200">
+          <iframe
+            src="https://www.google.com/maps?q=19.604105138604858,-99.22363568834344&hl=es&z=17&output=embed"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de Iron Supplements"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    import { initScrollAnimations } from '../utils/animations';
+
+    // Initialize animations
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrollAnimations);
+    } else {
+      initScrollAnimations();
+    }
+
+    // Form submission handler
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+        form.reset();
+      });
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,124 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/header/Header.astro';
+import Footer from '../components/footer/Footer.astro';
+import Image from "astro/components/Image.astro";
+import Creatina from "../assets/images/creatine.png";
+import Proteina from "../assets/images/protein.png";
+import Preentreno from "../assets/images/pre.png";
+import Bcaa from "../assets/images/bcaa.png";
+import '../styles/global.css';
+import '../styles/fonts.css';
+
+const programs = await getCollection('programs');
+const sortedPrograms = programs.sort((a, b) => a.data.order - b.data.order);
+
+const imageMap: Record<string, any> = {
+  "/src/assets/images/protein.png": Proteina,
+  "/src/assets/images/creatine.png": Creatina,
+  "/src/assets/images/pre.png": Preentreno,
+  "/src/assets/images/bcaa.png": Bcaa,
+};
+---
+
+<BaseLayout
+  title="Productos - Iron Supplements"
+  description="Explora nuestra línea completa de suplementos deportivos premium. Proteína, creatina, pre-entreno, BCAAs y más."
+>
+  <Header />
+
+  <main class="pt-20 md:pt-24">
+    <!-- Hero Section -->
+    <section class="bg-black text-white py-20 md:py-32">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10 text-center">
+        <h1 class="text-display-mobile-11 md:text-display-12 font-oswald font-bold mb-6 leading-106 animate-section">
+          Nuestros Productos
+        </h1>
+        <p class="text-display-6 md:text-display-8 text-gray-300 max-w-3xl mx-auto">
+          Suplementos de la más alta calidad, respaldados por la ciencia y diseñados para maximizar tu rendimiento
+        </p>
+      </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="py-sections-xs bg-white">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 animate-cards">
+          {sortedPrograms.map((program) => (
+            <div class="card-item bg-gray-50 rounded-radius-lg overflow-hidden hover:shadow-2xl transition-all group">
+              <div class="bg-yellow-400 p-8 flex items-center justify-center min-h-[300px]">
+                <Image
+                  alt={program.data.title}
+                  src={imageMap[program.data.image]}
+                  class="h-[250px] w-auto transform group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <div class="p-8">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-4xl">{program.data.icon}</span>
+                  <h2 class="text-display-9 md:text-display-10 font-oswald font-bold text-black">
+                    {program.data.title}
+                  </h2>
+                </div>
+                <p class="text-display-6 text-gray-600 mb-6">
+                  {program.data.description}
+                </p>
+                <div class="space-y-3 mb-6">
+                  <h3 class="font-oswald font-semibold text-display-7 text-black">
+                    Beneficios:
+                  </h3>
+                  <ul class="space-y-2">
+                    {program.data.features.map((feature: string) => (
+                      <li class="flex items-start gap-2 text-display-5 text-gray-700">
+                        <svg class="w-5 h-5 text-yellow-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <a
+                  href="/contact"
+                  class="inline-block bg-yellow-400 text-black text-display-6 font-oswald font-mid px-6 py-3 rounded-radius-sm transition-all hover:bg-black hover:text-yellow-400 border-2 border-transparent hover:border-yellow-400"
+                >
+                  Consultar Disponibilidad
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 md:px-10 text-center">
+        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold mb-6 text-black">
+          ¿No estás seguro cuál producto necesitas?
+        </h2>
+        <p class="text-display-6 text-gray-600 mb-8">
+          Nuestro equipo de expertos está listo para ayudarte a elegir el suplemento perfecto para tus objetivos
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-mid px-8 py-4 rounded-radius-sm transition-all hover:bg-black hover:text-yellow-400 border-2 border-transparent hover:border-yellow-400"
+        >
+          Hablar con un Experto
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    import { initScrollAnimations } from '../utils/animations';
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrollAnimations);
+    } else {
+      initScrollAnimations();
+    }
+  </script>
+</BaseLayout>

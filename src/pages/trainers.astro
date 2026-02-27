@@ -1,0 +1,199 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/header/Header.astro';
+import Footer from '../components/footer/Footer.astro';
+import '../styles/global.css';
+import '../styles/fonts.css';
+
+const trainers = await getCollection('trainers');
+const sortedTrainers = trainers.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Nuestros Expertos - Iron Supplements"
+  description="Conoce a nuestro equipo de expertos certificados en nutrición deportiva y suplementación. Asesoría personalizada para alcanzar tus objetivos."
+>
+  <Header />
+
+  <main class="pt-20 md:pt-24">
+    <!-- Hero Section -->
+    <section class="bg-black text-white py-20 md:py-32">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10 text-center">
+        <h1 class="text-display-mobile-11 md:text-display-12 font-oswald font-bold mb-6 leading-106 animate-section">
+          Nuestros Expertos
+        </h1>
+        <p class="text-display-6 md:text-display-8 text-gray-300 max-w-3xl mx-auto">
+          Profesionales certificados dedicados a ayudarte a alcanzar tus objetivos con asesoría basada en ciencia
+        </p>
+      </div>
+    </section>
+
+    <!-- Trainers Grid -->
+    <section class="py-sections-xs bg-white">
+      <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-cards">
+          {sortedTrainers.map((trainer, index) => (
+            <div class="card-item bg-gray-50 rounded-radius-lg overflow-hidden hover:shadow-xl transition-all group" data-index={index}>
+              <div class="bg-yellow-400 h-64 flex items-center justify-center">
+                <div class="w-48 h-48 bg-gray-300 rounded-full flex items-center justify-center">
+                  <span class="text-6xl">👤</span>
+                </div>
+              </div>
+              <div class="p-6">
+                <h2 class="text-display-9 md:text-display-10 font-oswald font-bold text-black mb-2">
+                  {trainer.data.name}
+                </h2>
+                <p class="text-display-6 text-yellow-600 font-semibold mb-4">
+                  {trainer.data.title}
+                </p>
+                <p class="text-display-5 text-gray-600 mb-4 leading-relaxed">
+                  {trainer.data.bio}
+                </p>
+
+                <div class="mb-4">
+                  <h3 class="font-oswald font-semibold text-display-6 text-black mb-2">
+                    Especialidades:
+                  </h3>
+                  <div class="flex flex-wrap gap-2">
+                    {trainer.data.specialties.map((specialty: string) => (
+                      <span class="bg-yellow-100 text-gray-800 text-display-4 px-3 py-1 rounded-full">
+                        {specialty}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {trainer.data.certifications && (
+                  <div class="mb-4">
+                    <h3 class="font-oswald font-semibold text-display-6 text-black mb-2">
+                      Certificaciones:
+                    </h3>
+                    <ul class="space-y-1">
+                      {trainer.data.certifications.map((cert: string) => (
+                        <li class="text-display-4 text-gray-600 flex items-start gap-2">
+                          <svg class="w-4 h-4 text-yellow-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                          </svg>
+                          <span>{cert}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <div class="pt-4 border-t border-gray-200">
+                  <p class="text-display-5 text-gray-600">
+                    <span class="font-semibold">Experiencia:</span> {trainer.data.experience}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-20 bg-gray-50 animate-section">
+      <div class="max-w-4xl mx-auto px-4 md:px-10">
+        <div class="text-center mb-12">
+          <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-4">
+            ¿Por qué elegirnos?
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                <span class="text-2xl">🎓</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-oswald font-bold text-display-7 text-black mb-2">
+                Profesionales Certificados
+              </h3>
+              <p class="text-display-5 text-gray-600">
+                Todos nuestros expertos cuentan con certificaciones reconocidas internacionalmente
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                <span class="text-2xl">🔬</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-oswald font-bold text-display-7 text-black mb-2">
+                Enfoque Científico
+              </h3>
+              <p class="text-display-5 text-gray-600">
+                Recomendaciones basadas en evidencia científica y resultados comprobados
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                <span class="text-2xl">👥</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-oswald font-bold text-display-7 text-black mb-2">
+                Atención Personalizada
+              </h3>
+              <p class="text-display-5 text-gray-600">
+                Planes adaptados a tus objetivos, nivel de entrenamiento y necesidades específicas
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                <span class="text-2xl">💪</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-oswald font-bold text-display-7 text-black mb-2">
+                Resultados Garantizados
+              </h3>
+              <p class="text-display-5 text-gray-600">
+                Seguimiento continuo para asegurar que alcances tus metas de forma efectiva
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-black text-white">
+      <div class="max-w-4xl mx-auto px-4 md:px-10 text-center">
+        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold mb-6">
+          Agenda una Consulta Personalizada
+        </h2>
+        <p class="text-display-6 md:text-display-8 text-gray-300 mb-8">
+          Nuestros expertos están listos para ayudarte a crear el plan perfecto para tus objetivos
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-mid px-8 py-4 rounded-radius-sm transition-all hover:bg-yellow-300"
+        >
+          Contactar Ahora
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    import { initScrollAnimations } from '../utils/animations';
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrollAnimations);
+    } else {
+      initScrollAnimations();
+    }
+  </script>
+</BaseLayout>

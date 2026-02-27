@@ -1,0 +1,72 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description = "Iron Supplements - Suplementos deportivos premium para maximizar tu rendimiento. Proteína, creatina, pre-entreno y más.",
+  image = "/og-image.jpg",
+  noIndex = false
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="generator" content={Astro.generator}>
+
+  <!-- SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonicalURL}>
+  {noIndex && <meta name="robots" content="noindex, nofollow">}
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={canonicalURL}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={new URL(image, Astro.site)}>
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content={canonicalURL}>
+  <meta property="twitter:title" content={title}>
+  <meta property="twitter:description" content={description}>
+  <meta property="twitter:image" content={new URL(image, Astro.site)}>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsActivityLocation",
+      "name": "Iron Supplements",
+      "description": "Tienda de suplementos deportivos premium",
+      "url": "https://ironsupplements.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Mirasol, Jaral",
+        "addressLocality": "Atizapán de Zaragoza",
+        "addressRegion": "Estado de México",
+        "addressCountry": "MX"
+      },
+      "telephone": "+52 55 4345 5565",
+      "email": "ironSupplements@contact.com",
+      "openingHours": "Tu-Su 09:00-20:00",
+      "priceRange": "$$"
+    }
+  </script>
+</head>
+<body class="antialiased">
+  <slot />
+</body>
+</html>

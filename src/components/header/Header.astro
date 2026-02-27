@@ -1,0 +1,125 @@
+---
+import Icon from "../icon/icons.astro"
+import HamburgerMenu from "../../assets/icons/hamburger-icon.svg?raw"
+
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: "/", label: "Inicio" },
+  { href: "/programs", label: "Productos" },
+  { href: "/about", label: "Nosotros" },
+  { href: "/trainers", label: "Expertos" },
+  { href: "/pricing", label: "Precios" },
+  { href: "/contact", label: "Contacto" }
+];
+---
+
+<nav class="bg-black text-white fixed w-full z-50 top-0" id="main-nav">
+  <div class="flex justify-between px-4 md:px-10 py-4 md:py-5 items-center max-w-[1920px] mx-auto">
+    <a href="/" class="text-display-9 font-mono text-yellow-300 font-mid hover:opacity-80 transition-opacity">
+      IRON SUPPLEMENTS
+    </a>
+
+    <ul class="hidden gap-6 xl:gap-10 text-display-6 font-medium xl:flex">
+      {navItems.map(item => (
+        <li>
+          <a
+            href={item.href}
+            class={`hover:text-yellow-300 transition-all cursor-pointer ${currentPath === item.href ? 'text-yellow-300' : ''}`}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="xl:hidden">
+      <button
+        id="hamburger-button"
+        aria-label="Menú de navegación"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded z-20 p-2"
+      >
+        <Icon icon={HamburgerMenu} iconClass="hover:opacity-55 transition-all w-6 h-6 text-white" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menú de navegación móvil"
+    class="
+      xl:hidden fixed top-0 left-0 w-full h-screen bg-black z-40
+      opacity-0 -translate-x-full pointer-events-none
+      transition-all duration-300 ease-in-out
+    "
+  >
+    <div class="flex flex-col items-center justify-center h-full gap-8 py-20">
+      <ul class="flex flex-col items-center gap-6 text-display-6 md:text-display-8 font-medium">
+        {navItems.map(item => (
+          <li>
+            <a
+              href={item.href}
+              class={`hover:text-yellow-300 transition-all cursor-pointer py-2 ${currentPath === item.href ? 'text-yellow-300' : ''}`}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburgerButton = document.getElementById('hamburger-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const body = document.body;
+
+  if (hamburgerButton && mobileMenu) {
+    hamburgerButton.addEventListener('click', () => {
+      const isExpanded = hamburgerButton.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        // Close menu
+        mobileMenu.classList.add('opacity-0', '-translate-x-full', 'pointer-events-none');
+        mobileMenu.classList.remove('opacity-100', 'translate-x-0', 'pointer-events-auto');
+        hamburgerButton.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      } else {
+        // Open menu
+        mobileMenu.classList.remove('opacity-0', '-translate-x-full', 'pointer-events-none');
+        mobileMenu.classList.add('opacity-100', 'translate-x-0', 'pointer-events-auto');
+        hamburgerButton.setAttribute('aria-expanded', 'true');
+        body.style.overflow = 'hidden';
+      }
+    });
+
+    // Close menu when clicking on a link
+    const menuLinks = mobileMenu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('opacity-0', '-translate-x-full', 'pointer-events-none');
+        mobileMenu.classList.remove('opacity-100', 'translate-x-0', 'pointer-events-auto');
+        hamburgerButton.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      });
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && hamburgerButton.getAttribute('aria-expanded') === 'true') {
+        mobileMenu.classList.add('opacity-0', '-translate-x-full', 'pointer-events-none');
+        mobileMenu.classList.remove('opacity-100', 'translate-x-0', 'pointer-events-auto');
+        hamburgerButton.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      }
+    });
+  }
+</script>
