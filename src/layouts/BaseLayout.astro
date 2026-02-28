@@ -13,7 +13,10 @@ const {
   noIndex = false
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Handle both local dev and production
+const site = Astro.site?.toString() || 'https://ironsupplements.netlify.app';
+const canonicalURL = new URL(Astro.url.pathname, site);
+const imageURL = new URL(image, site);
 ---
 
 <!DOCTYPE html>
@@ -35,36 +38,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:url" content={canonicalURL}>
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
-  <meta property="og:image" content={new URL(image, Astro.site)}>
+  <meta property="og:image" content={imageURL}>
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content={canonicalURL}>
   <meta property="twitter:title" content={title}>
   <meta property="twitter:description" content={description}>
-  <meta property="twitter:image" content={new URL(image, Astro.site)}>
+  <meta property="twitter:image" content={imageURL}>
 
   <!-- Structured Data -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SportsActivityLocation",
-      "name": "Iron Supplements",
-      "description": "Tienda de suplementos deportivos premium",
-      "url": "https://ironsupplements.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Av. Mirasol, Jaral",
-        "addressLocality": "Atizapán de Zaragoza",
-        "addressRegion": "Estado de México",
-        "addressCountry": "MX"
-      },
-      "telephone": "+52 55 4345 5565",
-      "email": "ironSupplements@contact.com",
-      "openingHours": "Tu-Su 09:00-20:00",
-      "priceRange": "$$"
-    }
-  </script>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "Iron Supplements",
+    "description": "Tienda de suplementos deportivos premium",
+    "url": site,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Mirasol, Jaral",
+      "addressLocality": "Atizapán de Zaragoza",
+      "addressRegion": "Estado de México",
+      "addressCountry": "MX"
+    },
+    "telephone": "+52 55 4345 5565",
+    "email": "ironSupplements@contact.com",
+    "openingHours": "Tu-Su 09:00-20:00",
+    "priceRange": "$$"
+  })} />
 </head>
 <body class="antialiased">
   <slot />
