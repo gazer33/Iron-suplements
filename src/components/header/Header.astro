@@ -12,26 +12,46 @@ const navItems = [
   { href: "/pricing", label: "Precios" },
   { href: "/contact", label: "Contacto" }
 ];
+
+// Helper function to check if a nav item is active
+// Handles both exact matches and nested routes (e.g., /programs/item highlights "Productos")
+const isActive = (itemHref: string, currentPath: string): boolean => {
+  if (itemHref === '/') {
+    // Home is only active on exact match
+    return currentPath === '/';
+  }
+  // For other routes, check if current path starts with the item href
+  return currentPath === itemHref || currentPath.startsWith(itemHref + '/');
+};
 ---
 
 <nav class="bg-black text-white fixed w-full z-50 top-0" id="main-nav">
   <div class="flex justify-between px-4 md:px-10 py-4 md:py-5 items-center max-w-[1920px] mx-auto">
-    <a href="/" class="text-display-9 font-mono text-yellow-300 font-mid hover:opacity-80 transition-opacity">
+    <a href="/" class="text-display-9 font-mono text-yellow-300 font-mid hover:opacity-80 transition-opacity duration-300">
       IRON SUPPLEMENTS
     </a>
 
     <ul class="hidden gap-6 xl:gap-10 text-display-6 font-medium xl:flex">
-      {navItems.map(item => (
-        <li>
-          <a
-            href={item.href}
-            class={`hover:text-yellow-300 transition-all cursor-pointer ${currentPath === item.href ? 'text-yellow-300' : ''}`}
-            aria-current={currentPath === item.href ? 'page' : undefined}
-          >
-            {item.label}
-          </a>
-        </li>
-      ))}
+      {navItems.map(item => {
+        const active = isActive(item.href, currentPath);
+        return (
+          <li>
+            <a
+              href={item.href}
+              class={`
+                relative py-1 px-2 rounded-sm
+                transition-all duration-300 ease-out
+                hover:text-yellow-300
+                ${active ? 'text-yellow-300' : 'text-white'}
+                ${active ? 'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-yellow-300 after:rounded-full' : ''}
+              `}
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        );
+      })}
     </ul>
 
     <div class="xl:hidden">
@@ -40,9 +60,9 @@ const navItems = [
         aria-label="Menú de navegación"
         aria-expanded="false"
         aria-controls="mobile-menu"
-        class="focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded z-20 p-2"
+        class="focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded z-20 p-2 transition-all duration-200"
       >
-        <Icon icon={HamburgerMenu} iconClass="hover:opacity-55 transition-all w-6 h-6 text-white" />
+        <Icon icon={HamburgerMenu} iconClass="hover:opacity-55 transition-opacity duration-300 w-6 h-6 text-white" />
       </button>
     </div>
   </div>
@@ -61,17 +81,25 @@ const navItems = [
   >
     <div class="flex flex-col items-center justify-center h-full gap-8 py-20">
       <ul class="flex flex-col items-center gap-6 text-display-6 md:text-display-8 font-medium">
-        {navItems.map(item => (
-          <li>
-            <a
-              href={item.href}
-              class={`hover:text-yellow-300 transition-all cursor-pointer py-2 ${currentPath === item.href ? 'text-yellow-300' : ''}`}
-              aria-current={currentPath === item.href ? 'page' : undefined}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
+        {navItems.map(item => {
+          const active = isActive(item.href, currentPath);
+          return (
+            <li>
+              <a
+                href={item.href}
+                class={`
+                  py-2 px-4 rounded-md
+                  transition-all duration-300 ease-out
+                  hover:text-yellow-300 hover:bg-yellow-400/10
+                  ${active ? 'text-yellow-300 bg-yellow-400/10' : 'text-white'}
+                `}
+                aria-current={active ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   </div>
