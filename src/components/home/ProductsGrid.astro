@@ -17,13 +17,13 @@ const imageMap: Record<string, any> = {
 };
 ---
 
-<section class="xl:py-sections-xs py-sections-mobile-small bg-white animate-section" id="products">
+<section class="xl:py-sections-xs py-sections-mobile-small bg-neutral-900 animate-section" id="products">
   <div class="flex flex-col items-center justify-center gap-10 px-4 md:px-10">
     <div class="text-center max-w-3xl">
-      <h2 class="md:text-display-11 text-display-mobile-10 font-oswald font-bold text-black mb-4">
+      <h2 class="md:text-display-11 text-display-mobile-10 font-oswald font-bold text-white mb-4">
         Productos Populares
       </h2>
-      <p class="text-display-6 text-gray-600">
+      <p class="text-display-6 text-gray-300">
         Suplementos de la más alta calidad respaldados por la ciencia y probados por atletas
       </p>
     </div>
@@ -31,17 +31,17 @@ const imageMap: Record<string, any> = {
     <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 w-full max-w-container-treatments animate-cards">
       {sortedPrograms.slice(0, 6).map((program) => (
         <div class="card-item flex flex-col justify-center items-center text-center group">
-          <div class="bg-yellow-500 hover:bg-black transition-all cursor-pointer w-full max-w-[400px] items-center flex justify-center rounded-radius-lg overflow-hidden">
+          <div class="bg-yellow-500 hover:bg-yellow-400 transition-all duration-300 cursor-pointer w-full max-w-[400px] items-center flex justify-center rounded-radius-lg overflow-hidden">
             <Image
               alt={program.data.description}
               src={imageMap[program.data.image]}
-              class="xl:h-[50vh] h-[40vh] md:h-[50vh] w-auto transform group-hover:scale-110 transition-transform duration-300"
+              class="xl:h-[50vh] h-[40vh] md:h-[50vh] w-auto transform group-hover:scale-110 transition-transform duration-500"
             />
           </div>
-          <h3 class="text-display-9 md:text-display-10 font-oswald font-semibold mt-4 text-black">
+          <h3 class="text-display-9 md:text-display-10 font-oswald font-semibold mt-4 text-white">
             {program.data.title}
           </h3>
-          <p class="text-display-5 text-gray-600 mt-2 max-w-md">
+          <p class="text-display-5 text-gray-400 mt-2 max-w-md">
             {program.data.description}
           </p>
         </div>
@@ -50,7 +50,7 @@ const imageMap: Record<string, any> = {
 
     <a
       href="/programs"
-      class="bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-mid px-8 py-4 rounded-radius-sm transition-all hover:bg-black hover:text-yellow-400 hover:border-2 border-yellow-400 mt-6"
+      class="bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02] mt-6"
     >
       Ver Todos los Productos
     </a>

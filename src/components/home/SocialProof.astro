@@ -1,24 +1,33 @@
 ---
 const stats = [
   {
-    number: "5000+",
+    number: "5000",
+    suffix: "+",
     label: "Clientes Satisfechos",
-    icon: "👥"
+    icon: "👥",
+    duration: 2000
   },
   {
-    number: "100%",
+    number: "100",
+    suffix: "%",
     label: "Productos Originales",
-    icon: "✓"
+    icon: "✓",
+    duration: 1500
   },
   {
-    number: "8+",
+    number: "8",
+    suffix: "+",
     label: "Años de Experiencia",
-    icon: "🏆"
+    icon: "🏆",
+    duration: 1500
   },
   {
     number: "4.9",
+    suffix: "",
     label: "Calificación Promedio",
-    icon: "⭐"
+    icon: "⭐",
+    duration: 2000,
+    decimals: 1
   }
 ];
 ---
@@ -30,12 +39,16 @@ const stats = [
         <div
           class="stat-item text-center"
           data-index={index}
+          data-target={stat.number}
+          data-suffix={stat.suffix}
+          data-duration={stat.duration}
+          data-decimals={stat.decimals || 0}
         >
           <div class="text-4xl md:text-5xl mb-2">
             {stat.icon}
           </div>
           <div class="font-oswald font-bold text-display-10 md:text-display-11 text-black mb-2">
-            {stat.number}
+            <span class="stat-number">0</span><span class="stat-suffix">{stat.suffix}</span>
           </div>
           <div class="text-display-5 md:text-display-6 text-gray-800 font-medium">
             {stat.label}
@@ -45,3 +58,84 @@ const stats = [
     </div>
   </div>
 </section>
+
+<script>
+  // Animated counter that respects prefers-reduced-motion
+  function animateCounter(element: HTMLElement, target: number, duration: number, decimals: number = 0, suffix: string = '') {
+    const numberSpan = element.querySelector('.stat-number');
+    if (!numberSpan) return;
+
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      // If reduced motion, show final value immediately
+      numberSpan.textContent = decimals > 0 ? target.toFixed(decimals) : target.toString();
+      return;
+    }
+
+    const startTime = performance.now();
+    const startValue = 0;
+
+    function update(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing function for smooth animation (easeOutCubic)
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = startValue + (target - startValue) * easeOut;
+
+      numberSpan.textContent = decimals > 0 ? current.toFixed(decimals) : Math.floor(current).toString();
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        // Ensure we end on exact target value
+        numberSpan.textContent = decimals > 0 ? target.toFixed(decimals) : target.toString();
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  // Initialize counters when section is in viewport
+  function initCounters() {
+    const section = document.getElementById('social-proof');
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Trigger animation once
+            const statItems = section.querySelectorAll('.stat-item');
+            statItems.forEach((item) => {
+              const target = parseFloat(item.getAttribute('data-target') || '0');
+              const duration = parseInt(item.getAttribute('data-duration') || '2000');
+              const decimals = parseInt(item.getAttribute('data-decimals') || '0');
+              const suffix = item.getAttribute('data-suffix') || '';
+
+              animateCounter(item as HTMLElement, target, duration, decimals, suffix);
+            });
+
+            // Disconnect observer after first trigger
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of section is visible
+        rootMargin: '0px'
+      }
+    );
+
+    observer.observe(section);
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCounters);
+  } else {
+    initCounters();
+  }
+</script>

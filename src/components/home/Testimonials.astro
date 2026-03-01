@@ -5,13 +5,13 @@ const testimonials = await getCollection('testimonials');
 const sortedTestimonials = testimonials.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<section class="py-sections-xs bg-white" id="testimonials">
+<section class="py-sections-xs bg-zinc-900 border-y border-zinc-800" id="testimonials">
   <div class="max-w-container-treatments mx-auto px-4 md:px-10">
     <div class="text-center mb-12">
-      <h2 class="md:text-display-11 text-display-mobile-10 font-oswald font-bold text-black mb-4">
+      <h2 class="md:text-display-11 text-display-mobile-10 font-oswald font-bold text-white mb-4">
         Lo que dicen nuestros clientes
       </h2>
-      <p class="text-display-6 text-gray-600 max-w-2xl mx-auto">
+      <p class="text-display-6 text-gray-400 max-w-2xl mx-auto">
         Miles de clientes satisfechos han transformado su rendimiento con nuestros productos
       </p>
     </div>
@@ -19,7 +19,7 @@ const sortedTestimonials = testimonials.sort((a, b) => b.data.date.getTime() - a
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="testimonials-grid">
       {sortedTestimonials.map((testimonial, index) => (
         <div
-          class="testimonial-card bg-gray-50 rounded-radius-lg p-6 md:p-8 hover:shadow-xl transition-all"
+          class="testimonial-card bg-zinc-800/50 backdrop-blur-sm rounded-radius-lg p-6 md:p-8 hover:bg-zinc-800 border border-zinc-700 hover:border-yellow-400/30 transition-all duration-300"
           data-index={index}
         >
           <div class="flex gap-1 mb-4">
@@ -29,11 +29,11 @@ const sortedTestimonials = testimonials.sort((a, b) => b.data.date.getTime() - a
               </svg>
             ))}
           </div>
-          <p class="text-display-6 text-gray-700 mb-6 leading-relaxed">
+          <p class="text-display-6 text-gray-300 mb-6 leading-relaxed">
             "{testimonial.data.content}"
           </p>
-          <div class="border-t border-gray-200 pt-4">
-            <p class="font-oswald font-semibold text-display-7 text-black">
+          <div class="border-t border-zinc-700 pt-4">
+            <p class="font-oswald font-semibold text-display-7 text-white">
               {testimonial.data.author}
             </p>
             {testimonial.data.role && (

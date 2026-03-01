@@ -5,30 +5,30 @@ const faqs = await getCollection('faq');
 const sortedFaqs = faqs.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section class="py-sections-xs bg-gray-50" id="faq">
+<section class="py-sections-xs bg-neutral-900" id="faq">
   <div class="max-w-container-treatments mx-auto px-4 md:px-10">
     <div class="text-center mb-12">
-      <h2 class="md:text-display-11 text-display-mobile-10 font-oswald font-bold text-black mb-4">
+      <h2 class="md:text-display-11 text-display-mobile-10 font-oswald font-bold text-white mb-4">
         Preguntas Frecuentes
       </h2>
-      <p class="text-display-6 text-gray-600 max-w-2xl mx-auto">
+      <p class="text-display-6 text-gray-400 max-w-2xl mx-auto">
         Respuestas a las preguntas más comunes sobre nuestros productos y servicios
       </p>
     </div>
 
     <div class="max-w-4xl mx-auto space-y-4" id="faq-container">
       {sortedFaqs.map((faq, index) => (
-        <div class="faq-item bg-white rounded-radius-md overflow-hidden border border-gray-200" data-index={index}>
+        <div class="faq-item bg-zinc-800/30 rounded-radius-md overflow-hidden border border-zinc-700" data-index={index}>
           <button
-            class="faq-button w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+            class="faq-button w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center hover:bg-zinc-800/50 transition-all duration-300"
             aria-expanded="false"
             aria-controls={`faq-answer-${index}`}
           >
-            <span class="font-oswald font-semibold text-display-7 md:text-display-8 text-black pr-4">
+            <span class="font-oswald font-semibold text-display-7 md:text-display-8 text-white pr-4">
               {faq.data.question}
             </span>
             <svg
-              class="faq-icon w-6 h-6 flex-shrink-0 transform transition-transform duration-300"
+              class="faq-icon w-6 h-6 flex-shrink-0 transform transition-transform duration-300 text-yellow-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -41,7 +41,7 @@ const sortedFaqs = faqs.sort((a, b) => a.data.order - b.data.order);
             class="faq-answer max-h-0 overflow-hidden transition-all duration-300"
             role="region"
           >
-            <div class="px-6 md:px-8 pb-5 md:pb-6 text-display-5 md:text-display-6 text-gray-600 leading-relaxed">
+            <div class="px-6 md:px-8 pb-5 md:pb-6 text-display-5 md:text-display-6 text-gray-300 leading-relaxed">
               {faq.data.answer}
             </div>
           </div>
