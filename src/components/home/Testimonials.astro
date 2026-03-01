@@ -5,7 +5,7 @@ const testimonials = await getCollection('testimonials');
 const sortedTestimonials = testimonials.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<section class="py-sections-xs bg-zinc-900 border-y border-zinc-800" id="testimonials">
+<section class="py-sections-xs bg-zinc-900 border-y border-zinc-800 overflow-hidden" id="testimonials">
   <div class="max-w-container-treatments mx-auto px-4 md:px-10">
     <div class="text-center mb-12">
       <h2 class="md:text-display-11 text-display-mobile-10 font-oswald font-bold text-white mb-4">
@@ -16,34 +16,286 @@ const sortedTestimonials = testimonials.sort((a, b) => b.data.date.getTime() - a
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="testimonials-grid">
-      {sortedTestimonials.map((testimonial, index) => (
-        <div
-          class="testimonial-card bg-zinc-800/50 backdrop-blur-sm rounded-radius-lg p-6 md:p-8 hover:bg-zinc-800 border border-zinc-700 hover:border-yellow-400/30 transition-all duration-300"
-          data-index={index}
-        >
-          <div class="flex gap-1 mb-4">
-            {Array.from({ length: testimonial.data.rating }).map(() => (
-              <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-              </svg>
-            ))}
-          </div>
-          <p class="text-display-6 text-gray-300 mb-6 leading-relaxed">
-            "{testimonial.data.content}"
-          </p>
-          <div class="border-t border-zinc-700 pt-4">
-            <p class="font-oswald font-semibold text-display-7 text-white">
-              {testimonial.data.author}
-            </p>
-            {testimonial.data.role && (
-              <p class="text-display-4 text-gray-500 mt-1">
-                {testimonial.data.role}
-              </p>
-            )}
-          </div>
+    <!-- Slider Container -->
+    <div class="relative">
+      <!-- Navigation Arrows -->
+      <button
+        id="testimonials-prev"
+        class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10
+          bg-yellow-400 hover:bg-yellow-300 text-black rounded-full p-3 md:p-4
+          transition-all duration-300 ease-out hover:scale-110
+          shadow-lg hover:shadow-xl
+          disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        aria-label="Previous testimonial"
+      >
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button
+        id="testimonials-next"
+        class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10
+          bg-yellow-400 hover:bg-yellow-300 text-black rounded-full p-3 md:p-4
+          transition-all duration-300 ease-out hover:scale-110
+          shadow-lg hover:shadow-xl
+          disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        aria-label="Next testimonial"
+      >
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Slider Track -->
+      <div class="overflow-hidden" id="testimonials-viewport">
+        <div class="flex gap-6 md:gap-8" id="testimonials-track">
+          {sortedTestimonials.map((testimonial, index) => (
+            <div
+              class="testimonial-slide flex-shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
+              data-index={index}
+            >
+              <div class="testimonial-card bg-zinc-800/50 backdrop-blur-sm rounded-radius-lg p-6 md:p-8
+                border border-zinc-700 hover:border-yellow-400/30 transition-all duration-500
+                h-full flex flex-col">
+                <div class="flex gap-1 mb-4">
+                  {Array.from({ length: testimonial.data.rating }).map(() => (
+                    <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                    </svg>
+                  ))}
+                </div>
+                <p class="text-display-6 text-gray-300 mb-6 leading-relaxed flex-grow">
+                  "{testimonial.data.content}"
+                </p>
+                <div class="border-t border-zinc-700 pt-4">
+                  <p class="font-oswald font-semibold text-display-7 text-white">
+                    {testimonial.data.author}
+                  </p>
+                  {testimonial.data.role && (
+                    <p class="text-display-4 text-gray-500 mt-1">
+                      {testimonial.data.role}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
+
+      <!-- Pagination Dots -->
+      <div class="flex justify-center gap-2 mt-8" id="testimonials-pagination">
+        {sortedTestimonials.map((_, index) => (
+          <button
+            class="testimonial-dot w-2.5 h-2.5 rounded-full bg-zinc-700 transition-all duration-300 ease-out
+              hover:bg-yellow-400/50"
+            data-index={index}
+            aria-label={`Go to testimonial ${index + 1}`}
+          >
+          </button>
+        ))}
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { Draggable } from 'gsap/Draggable';
+
+  gsap.registerPlugin(Draggable);
+
+  class TestimonialsSlider {
+    private track: HTMLElement;
+    private slides: HTMLElement[];
+    private prevBtn: HTMLButtonElement;
+    private nextBtn: HTMLButtonElement;
+    private dots: HTMLButtonElement[];
+    private currentIndex: number = 0;
+    private autoplayInterval: number | null = null;
+    private autoplayDelay: number = 5000; // 5 seconds
+    private isAnimating: boolean = false;
+
+    constructor() {
+      this.track = document.getElementById('testimonials-track') as HTMLElement;
+      this.slides = Array.from(document.querySelectorAll('.testimonial-slide'));
+      this.prevBtn = document.getElementById('testimonials-prev') as HTMLButtonElement;
+      this.nextBtn = document.getElementById('testimonials-next') as HTMLButtonElement;
+      this.dots = Array.from(document.querySelectorAll('.testimonial-dot'));
+
+      if (!this.track || this.slides.length === 0) return;
+
+      this.init();
+    }
+
+    init() {
+      // Set initial state
+      this.updateButtons();
+      this.updateDots();
+
+      // Event listeners
+      this.prevBtn?.addEventListener('click', () => this.prev());
+      this.nextBtn?.addEventListener('click', () => this.next());
+
+      this.dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => this.goToSlide(index));
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') this.prev();
+        if (e.key === 'ArrowRight') this.next();
+      });
+
+      // Auto-play
+      this.startAutoplay();
+
+      // Pause autoplay on hover
+      const section = document.getElementById('testimonials');
+      section?.addEventListener('mouseenter', () => this.stopAutoplay());
+      section?.addEventListener('mouseleave', () => this.startAutoplay());
+
+      // Respect reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        this.stopAutoplay();
+      }
+
+      // Touch swipe support
+      this.initSwipe();
+    }
+
+    initSwipe() {
+      let startX = 0;
+      let currentX = 0;
+
+      this.track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        this.stopAutoplay();
+      }, { passive: true });
+
+      this.track.addEventListener('touchmove', (e) => {
+        currentX = e.touches[0].clientX;
+      }, { passive: true });
+
+      this.track.addEventListener('touchend', () => {
+        const diff = startX - currentX;
+        const threshold = 50; // Minimum swipe distance
+
+        if (Math.abs(diff) > threshold) {
+          if (diff > 0) {
+            this.next();
+          } else {
+            this.prev();
+          }
+        }
+        this.startAutoplay();
+      });
+    }
+
+    goToSlide(index: number) {
+      if (this.isAnimating || index === this.currentIndex) return;
+      if (index < 0 || index >= this.slides.length) return;
+
+      this.isAnimating = true;
+      this.stopAutoplay();
+
+      const slideWidth = this.slides[0].offsetWidth;
+      const gap = 32; // 8 * 4 = 32px (gap-8 on desktop)
+      const offset = -(index * (slideWidth + gap));
+
+      gsap.to(this.track, {
+        x: offset,
+        duration: 0.8,
+        ease: 'power3.out',
+        onComplete: () => {
+          this.currentIndex = index;
+          this.updateButtons();
+          this.updateDots();
+          this.isAnimating = false;
+          this.startAutoplay();
+        }
+      });
+    }
+
+    next() {
+      const nextIndex = this.currentIndex + 1;
+      if (nextIndex >= this.slides.length) {
+        // Loop back to start
+        this.goToSlide(0);
+      } else {
+        this.goToSlide(nextIndex);
+      }
+    }
+
+    prev() {
+      const prevIndex = this.currentIndex - 1;
+      if (prevIndex < 0) {
+        // Loop to end
+        this.goToSlide(this.slides.length - 1);
+      } else {
+        this.goToSlide(prevIndex);
+      }
+    }
+
+    updateButtons() {
+      // Enable/disable buttons based on position (if not looping)
+      // For looping slider, always enable
+      this.prevBtn.disabled = false;
+      this.nextBtn.disabled = false;
+    }
+
+    updateDots() {
+      this.dots.forEach((dot, index) => {
+        if (index === this.currentIndex) {
+          dot.classList.add('!bg-yellow-400', 'scale-125');
+          dot.classList.remove('bg-zinc-700');
+        } else {
+          dot.classList.remove('!bg-yellow-400', 'scale-125');
+          dot.classList.add('bg-zinc-700');
+        }
+      });
+    }
+
+    startAutoplay() {
+      if (this.autoplayInterval) return;
+
+      this.autoplayInterval = window.setInterval(() => {
+        this.next();
+      }, this.autoplayDelay);
+    }
+
+    stopAutoplay() {
+      if (this.autoplayInterval) {
+        clearInterval(this.autoplayInterval);
+        this.autoplayInterval = null;
+      }
+    }
+  }
+
+  // Initialize slider when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new TestimonialsSlider();
+    });
+  } else {
+    new TestimonialsSlider();
+  }
+</script>
+
+<style>
+  #testimonials-track {
+    will-change: transform;
+  }
+
+  .testimonial-dot.active {
+    @apply bg-yellow-400 scale-125;
+  }
+
+  /* Ensure smooth rendering */
+  .testimonial-slide {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+</style>
