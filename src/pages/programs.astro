@@ -8,6 +8,7 @@ import Creatina from "../assets/images/creatine.png";
 import Proteina from "../assets/images/protein.png";
 import Preentreno from "../assets/images/pre.png";
 import Bcaa from "../assets/images/bcaa.png";
+import ImageHeroProducts from "../assets/images/protein-SectionHero-Products.png";
 import '../styles/global.css';
 import '../styles/fonts.css';
 
@@ -28,50 +29,101 @@ const imageMap: Record<string, any> = {
 >
   <Header />
 
-  <main class="pt-20 md:pt-24">
-    <!-- Hero Section -->
-    <section class="bg-black text-white py-20 md:py-32">
-      <div class="max-w-container-treatments mx-auto px-4 md:px-10 text-center">
-        <h1 class="text-display-mobile-11 md:text-display-12 font-oswald font-bold mb-6 leading-106 animate-section">
-          Nuestros Productos
-        </h1>
-        <p class="text-display-6 md:text-display-8 text-gray-300 max-w-3xl mx-auto">
-          Suplementos de la más alta calidad, respaldados por la ciencia y diseñados para maximizar tu rendimiento
-        </p>
+  <main>
+    <!-- Hero Section (matching Home Hero structure) -->
+    <section class="bg-black text-white xl:p-0 md:pb-[600px] pb-[200px] overflow-hidden rounded-b-radius-xl pt-20 md:pt-24 relative">
+      <div class="xl:flex xl:flex-row justify-center items-center">
+        <Image
+          alt="Iron Supplements - Productos Premium"
+          src={ImageHeroProducts}
+          class="xl:max-h-[120vh] 2xl:max-h-[70vh] w-auto xl:opacity-100 opacity-40"
+          loading="eager"
+        />
+        <div class="flex flex-col items-center xl:max-w-[50%] gap-6 md:gap-10 xl:mt-0 mt-[-400px] md:mt-[-800px] relative z-40 px-4">
+          <h1 class="hero-title lg:text-[90px] lg:max-w-[50%] xl:max-w-[100%] text-display-mobile-12 md:text-display-10 leading-106 text-center font-oswald font-bold">
+            NUESTROS PRODUCTOS
+          </h1>
+          <p class="text-display-6 md:text-display-8 text-gray-300 text-center max-w-2xl px-4">
+            Suplementos de la más alta calidad, respaldados por la ciencia y diseñados para maximizar tu rendimiento
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto px-4 max-w-xl">
+            <!-- Primary CTA -->
+            <a
+              href="#productos"
+              class="hero-button
+                inline-flex items-center justify-center
+                bg-yellow-400 text-black
+                px-6 py-3 sm:px-7 sm:py-3.5
+                rounded-lg
+                font-oswald font-semibold text-base sm:text-lg
+                whitespace-nowrap
+                transition-all duration-300 ease-out
+                hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02]
+                focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:ring-offset-2 focus:ring-offset-black
+                text-center
+                min-h-[48px] sm:min-h-[52px]"
+            >
+              Ver Catálogo
+            </a>
+
+            <!-- Secondary CTA -->
+            <a
+              href="/contact"
+              class="hero-button
+                inline-flex items-center justify-center
+                border-2 border-yellow-400 text-yellow-400
+                px-6 py-3 sm:px-7 sm:py-3.5
+                rounded-lg
+                font-oswald font-semibold text-base sm:text-lg
+                whitespace-nowrap
+                transition-all duration-300 ease-out
+                hover:bg-yellow-400 hover:text-black hover:shadow-lg hover:scale-[1.02]
+                focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:ring-offset-2 focus:ring-offset-black
+                text-center
+                min-h-[48px] sm:min-h-[52px]"
+            >
+              Contáctanos
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Products Grid -->
-    <section class="py-sections-xs bg-white">
+    <section id="productos" class="py-sections-xs bg-neutral-900">
       <div class="max-w-container-treatments mx-auto px-4 md:px-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 animate-cards">
           {sortedPrograms.map((program) => (
-            <div class="card-item bg-gray-50 rounded-radius-lg overflow-hidden hover:shadow-2xl transition-all group">
+            <div class="card-item bg-zinc-800/50 backdrop-blur-sm rounded-radius-lg overflow-hidden
+              border border-zinc-700 hover:border-yellow-400/30
+              hover:shadow-2xl transition-all duration-500 group">
               <div class="bg-yellow-400 p-8 flex items-center justify-center min-h-[300px]">
                 <Image
                   alt={program.data.title}
                   src={imageMap[program.data.image]}
-                  class="h-[250px] w-auto transform group-hover:scale-110 transition-transform duration-300"
+                  class="h-[250px] w-auto transform group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
               <div class="p-8">
                 <div class="flex items-center gap-3 mb-4">
                   <span class="text-4xl">{program.data.icon}</span>
-                  <h2 class="text-display-9 md:text-display-10 font-oswald font-bold text-black">
+                  <h2 class="text-display-9 md:text-display-10 font-oswald font-bold text-white">
                     {program.data.title}
                   </h2>
                 </div>
-                <p class="text-display-6 text-gray-600 mb-6">
+                <p class="text-display-6 text-gray-300 mb-6">
                   {program.data.description}
                 </p>
                 <div class="space-y-3 mb-6">
-                  <h3 class="font-oswald font-semibold text-display-7 text-black">
+                  <h3 class="font-oswald font-semibold text-display-7 text-white">
                     Beneficios:
                   </h3>
                   <ul class="space-y-2">
                     {program.data.features.map((feature: string) => (
-                      <li class="flex items-start gap-2 text-display-5 text-gray-700">
-                        <svg class="w-5 h-5 text-yellow-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <li class="flex items-start gap-2 text-display-5 text-gray-400">
+                        <svg class="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                           <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                         </svg>
                         <span>{feature}</span>
@@ -81,7 +133,11 @@ const imageMap: Record<string, any> = {
                 </div>
                 <a
                   href="/contact"
-                  class="inline-block bg-yellow-400 text-black text-display-6 font-oswald font-mid px-6 py-3 rounded-radius-sm transition-all hover:bg-black hover:text-yellow-400 border-2 border-transparent hover:border-yellow-400"
+                  class="inline-block bg-yellow-400 text-black text-display-6 font-oswald font-mid
+                    px-6 py-3 rounded-radius-sm
+                    transition-all duration-300 ease-out
+                    hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02]
+                    border-2 border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-300"
                 >
                   Consultar Disponibilidad
                 </a>
@@ -93,17 +149,21 @@ const imageMap: Record<string, any> = {
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-20 bg-zinc-900 border-y border-zinc-800">
       <div class="max-w-4xl mx-auto px-4 md:px-10 text-center">
-        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold mb-6 text-black">
+        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold mb-6 text-white">
           ¿No estás seguro cuál producto necesitas?
         </h2>
-        <p class="text-display-6 text-gray-600 mb-8">
+        <p class="text-display-6 text-gray-400 mb-8">
           Nuestro equipo de expertos está listo para ayudarte a elegir el suplemento perfecto para tus objetivos
         </p>
         <a
           href="/contact"
-          class="inline-block bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-mid px-8 py-4 rounded-radius-sm transition-all hover:bg-black hover:text-yellow-400 border-2 border-transparent hover:border-yellow-400"
+          class="inline-block bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-mid
+            px-8 py-4 rounded-radius-sm
+            transition-all duration-300 ease-out
+            hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02]
+            border-2 border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:ring-offset-2 focus:ring-offset-zinc-900"
         >
           Hablar con un Experto
         </a>
