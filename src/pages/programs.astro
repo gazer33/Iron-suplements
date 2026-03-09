@@ -94,53 +94,95 @@ const imageMap: Record<string, any> = {
     <!-- Products Grid -->
     <section id="productos" class="py-sections-xs bg-neutral-900">
       <div class="max-w-[1120px] mx-auto px-4 md:px-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 animate-cards">
-          {sortedPrograms.map((program) => (
-            <div class="card-item bg-zinc-800/50 backdrop-blur-sm rounded-radius-lg overflow-hidden
-              border border-zinc-700 hover:border-yellow-400/30
-              hover:shadow-2xl transition-all duration-500 group">
-              <div class="bg-yellow-400 p-8 flex items-center justify-center min-h-[300px]">
-                <Image
-                  alt={program.data.title}
-                  src={imageMap[program.data.image]}
-                  class="h-[250px] w-auto transform group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div class="p-8">
-                <div class="flex items-center gap-3 mb-4">
-                  <span class="text-4xl">{program.data.icon}</span>
-                  <h2 class="text-display-9 md:text-display-10 font-oswald font-bold text-white">
-                    {program.data.title}
-                  </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 animate-cards">
+          {sortedPrograms.map((program, index) => (
+            <div
+              class="product-accordion bg-zinc-800/50 backdrop-blur-sm rounded-radius-lg overflow-hidden
+                border border-zinc-700 hover:border-yellow-400/30
+                transition-all duration-300 cursor-pointer group"
+              data-product-index={index}
+            >
+              <!-- Accordion Header (Always Visible) -->
+              <button
+                class="accordion-trigger w-full text-left focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-inset"
+                aria-expanded="false"
+                aria-controls={`product-content-${index}`}
+              >
+                <div class="bg-yellow-400 p-6 md:p-8 flex items-center justify-center min-h-[200px] md:min-h-[250px] relative">
+                  <Image
+                    alt={program.data.title}
+                    src={imageMap[program.data.image]}
+                    class="h-[180px] md:h-[220px] w-auto transform group-hover:scale-105 transition-transform duration-500"
+                  />
+
+                  <!-- Expand/Collapse Icon -->
+                  <div class="absolute bottom-4 right-4 bg-black/80 rounded-full p-2 transition-all duration-300 group-hover:bg-black">
+                    <svg class="accordion-icon w-6 h-6 text-yellow-400 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
                 </div>
-                <p class="text-display-6 text-gray-300 mb-6">
-                  {program.data.description}
-                </p>
-                <div class="space-y-3 mb-6">
-                  <h3 class="font-oswald font-semibold text-display-7 text-white">
-                    Beneficios:
-                  </h3>
-                  <ul class="space-y-2">
-                    {program.data.features.map((feature: string) => (
-                      <li class="flex items-start gap-2 text-display-5 text-gray-400">
-                        <svg class="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+
+                <div class="p-6 md:p-8">
+                  <div class="flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3 flex-1">
+                      <span class="text-3xl md:text-4xl">{program.data.icon}</span>
+                      <h2 class="text-display-8 md:text-display-9 font-oswald font-bold text-white">
+                        {program.data.title}
+                      </h2>
+                    </div>
+                  </div>
                 </div>
-                <a
-                  href="/contact"
-                  class="inline-block bg-yellow-400 text-black text-display-6 font-oswald font-mid
-                    px-6 py-3 rounded-radius-sm
-                    transition-all duration-300 ease-out
-                    hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02]
-                    border-2 border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-300"
-                >
-                  Consultar Disponibilidad
-                </a>
+              </button>
+
+              <!-- Accordion Content (Expandable) -->
+              <div
+                id={`product-content-${index}`}
+                class="accordion-content overflow-hidden"
+                style="height: 0; opacity: 0;"
+              >
+                <div class="accordion-inner px-6 md:px-8 pb-6 md:pb-8">
+                  <p class="text-display-5 md:text-display-6 text-gray-300 mb-6 leading-relaxed">
+                    {program.data.description}
+                  </p>
+
+                  <div class="space-y-3 mb-6">
+                    <h3 class="font-oswald font-semibold text-display-6 md:text-display-7 text-white flex items-center gap-2">
+                      <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                      </svg>
+                      Beneficios Clave
+                    </h3>
+                    <ul class="space-y-2 pl-1">
+                      {program.data.features.map((feature: string) => (
+                        <li class="flex items-start gap-2 text-display-4 md:text-display-5 text-gray-400">
+                          <svg class="w-4 h-4 md:w-5 md:h-5 text-yellow-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                          </svg>
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="pt-4 border-t border-zinc-700">
+                    <a
+                      href="/contact"
+                      class="inline-flex items-center justify-center w-full sm:w-auto
+                        bg-yellow-400 text-black text-display-5 md:text-display-6 font-oswald font-semibold
+                        px-6 py-3 rounded-radius-sm
+                        transition-all duration-300 ease-out
+                        hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02]
+                        border-2 border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                      onclick="event.stopPropagation()"
+                    >
+                      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                      </svg>
+                      Consultar Disponibilidad
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
@@ -174,11 +216,147 @@ const imageMap: Record<string, any> = {
   <Footer />
 
   <script>
+    import { gsap } from 'gsap';
     import { initScrollAnimations } from '../utils/animations';
+
+    class ProductAccordion {
+      private accordions: NodeListOf<Element>;
+
+      constructor() {
+        this.accordions = document.querySelectorAll('.product-accordion');
+        this.init();
+      }
+
+      init() {
+        this.accordions.forEach((accordion) => {
+          const trigger = accordion.querySelector('.accordion-trigger') as HTMLButtonElement;
+          const content = accordion.querySelector('.accordion-content') as HTMLElement;
+          const icon = accordion.querySelector('.accordion-icon') as HTMLElement;
+
+          if (!trigger || !content || !icon) return;
+
+          trigger.addEventListener('click', () => {
+            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+              this.collapse(trigger, content, icon);
+            } else {
+              // Collapse all other accordions first
+              this.collapseAll();
+              this.expand(trigger, content, icon);
+            }
+          });
+        });
+      }
+
+      expand(trigger: HTMLButtonElement, content: HTMLElement, icon: HTMLElement) {
+        const inner = content.querySelector('.accordion-inner') as HTMLElement;
+        if (!inner) return;
+
+        trigger.setAttribute('aria-expanded', 'true');
+
+        // Get the natural height
+        const contentHeight = inner.scrollHeight;
+
+        // Animate expansion
+        gsap.to(content, {
+          height: contentHeight,
+          opacity: 1,
+          duration: 0.6,
+          ease: 'power3.out',
+        });
+
+        // Rotate icon
+        gsap.to(icon, {
+          rotation: 180,
+          duration: 0.5,
+          ease: 'power2.out',
+        });
+
+        // Add active state to card
+        const card = trigger.closest('.product-accordion');
+        if (card) {
+          gsap.to(card, {
+            borderColor: 'rgba(250, 204, 21, 0.5)', // yellow-400 with opacity
+            duration: 0.3,
+          });
+        }
+      }
+
+      collapse(trigger: HTMLButtonElement, content: HTMLElement, icon: HTMLElement) {
+        trigger.setAttribute('aria-expanded', 'false');
+
+        // Animate collapse
+        gsap.to(content, {
+          height: 0,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power3.in',
+        });
+
+        // Rotate icon back
+        gsap.to(icon, {
+          rotation: 0,
+          duration: 0.4,
+          ease: 'power2.in',
+        });
+
+        // Remove active state from card
+        const card = trigger.closest('.product-accordion');
+        if (card) {
+          gsap.to(card, {
+            borderColor: 'rgb(63, 63, 70)', // zinc-700
+            duration: 0.3,
+          });
+        }
+      }
+
+      collapseAll() {
+        this.accordions.forEach((accordion) => {
+          const trigger = accordion.querySelector('.accordion-trigger') as HTMLButtonElement;
+          const content = accordion.querySelector('.accordion-content') as HTMLElement;
+          const icon = accordion.querySelector('.accordion-icon') as HTMLElement;
+
+          if (trigger?.getAttribute('aria-expanded') === 'true') {
+            this.collapse(trigger, content, icon);
+          }
+        });
+      }
+    }
+
+    // Initialize when DOM is ready
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initScrollAnimations);
+      document.addEventListener('DOMContentLoaded', () => {
+        initScrollAnimations();
+        new ProductAccordion();
+      });
     } else {
       initScrollAnimations();
+      new ProductAccordion();
     }
   </script>
+
+  <style>
+    .product-accordion {
+      will-change: border-color;
+    }
+
+    .accordion-content {
+      will-change: height, opacity;
+    }
+
+    .accordion-icon {
+      will-change: transform;
+    }
+
+    /* Smooth hover state */
+    .product-accordion:hover .accordion-icon {
+      transform: translateY(2px);
+    }
+
+    /* Active state styling */
+    .product-accordion[aria-expanded="true"] {
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+    }
+  </style>
 </BaseLayout>
