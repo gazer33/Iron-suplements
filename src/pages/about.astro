@@ -4,8 +4,15 @@ import Header from '../components/header/Header.astro';
 import Footer from '../components/footer/Footer.astro';
 import { Image } from "astro:assets";
 import AboutImage from "../assets/images/about1.png";
+import Proteina from "../assets/images/protein.png";
+import Creatina from "../assets/images/creatine.png";
+import Preentreno from "../assets/images/pre.png";
+import Bcaa from "../assets/images/bcaa.png";
 import '../styles/global.css';
 import '../styles/fonts.css';
+
+// Carousel images
+const carouselImages = [Proteina, Creatina, Preentreno, Bcaa];
 
 const values = [
   {
@@ -38,26 +45,121 @@ const values = [
   <Header />
 
   <main class="pt-20 md:pt-24 bg-black">
-    <!-- Hero Section -->
-    <section class="bg-black text-white py-20 md:py-32">
-      <div class="max-w-container-treatments mx-auto px-4 md:px-10">
-        <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-display-mobile-11 md:text-display-12 font-oswald font-bold mb-6 leading-106 animate-section">
-            Nuestra Historia
-          </h1>
-          <p class="text-display-6 md:text-display-8 text-gray-300">
-            Más de 8 años de pasión por el fitness y compromiso con la excelencia
-          </p>
+    <!-- Hero Section - Interactive Two Column with Vertical Carousel -->
+    <section class="bg-black text-white py-16 md:py-24 lg:py-32 overflow-hidden">
+      <div class="max-w-[1400px] mx-auto px-4 md:px-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          <!-- Left Column: Content -->
+          <div class="hero-content opacity-0">
+            <div class="space-y-8">
+              <div>
+                <div class="inline-block mb-4">
+                  <span class="text-yellow-400 text-display-5 md:text-display-6 font-oswald font-semibold uppercase tracking-wider
+                    border border-yellow-400/30 px-4 py-2 rounded-full">
+                    Desde 2016
+                  </span>
+                </div>
+                <h1 class="text-display-11 md:text-display-12 lg:text-[80px] font-oswald font-bold mb-6 leading-[1.05]">
+                  NUESTRA<br />HISTORIA
+                </h1>
+                <p class="text-display-6 md:text-display-8 text-gray-300 leading-relaxed max-w-xl">
+                  Más de 8 años de pasión por el fitness y compromiso con la excelencia. Transformando vidas a través de suplementos premium y asesoría experta.
+                </p>
+              </div>
+
+              <!-- CTA Buttons -->
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="#story"
+                  class="inline-flex items-center justify-center
+                    bg-yellow-400 text-black
+                    px-8 py-4 rounded-lg
+                    font-oswald font-semibold text-display-6 md:text-display-7
+                    transition-all duration-300 ease-out
+                    hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02]"
+                >
+                  Conoce Más
+                  <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+                <a
+                  href="/programs"
+                  class="inline-flex items-center justify-center
+                    border-2 border-yellow-400 text-yellow-400
+                    px-8 py-4 rounded-lg
+                    font-oswald font-semibold text-display-6 md:text-display-7
+                    transition-all duration-300 ease-out
+                    hover:bg-yellow-400 hover:text-black hover:shadow-lg hover:scale-[1.02]"
+                >
+                  Ver Productos
+                </a>
+              </div>
+
+              <!-- Stats -->
+              <div class="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-800">
+                <div>
+                  <p class="text-display-10 md:text-display-11 font-oswald font-bold text-yellow-400">8+</p>
+                  <p class="text-display-4 md:text-display-5 text-gray-400 font-oswald uppercase">Años</p>
+                </div>
+                <div>
+                  <p class="text-display-10 md:text-display-11 font-oswald font-bold text-yellow-400">5K+</p>
+                  <p class="text-display-4 md:text-display-5 text-gray-400 font-oswald uppercase">Clientes</p>
+                </div>
+                <div>
+                  <p class="text-display-10 md:text-display-11 font-oswald font-bold text-yellow-400">100%</p>
+                  <p class="text-display-4 md:text-display-5 text-gray-400 font-oswald uppercase">Premium</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Vertical Carousel -->
+          <div class="hero-carousel opacity-0 relative lg:h-[600px] h-[400px]">
+            <div class="carousel-container relative h-full overflow-hidden rounded-2xl border border-zinc-800">
+              <!-- Carousel Track -->
+              <div id="carousel-track" class="absolute top-0 left-0 w-full">
+                {carouselImages.map((img, index) => (
+                  <div class="carousel-slide bg-yellow-400 rounded-2xl p-12 flex items-center justify-center h-[400px] lg:h-[600px] mb-6">
+                    <Image
+                      src={img}
+                      alt={`Product ${index + 1}`}
+                      class="max-h-[80%] w-auto object-contain drop-shadow-2xl"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <!-- Gradient Overlays -->
+              <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-10"></div>
+              <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-10"></div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <div class="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
+              {carouselImages.map((_, index) => (
+                <button
+                  class="carousel-dot w-3 h-3 rounded-full bg-zinc-700 transition-all duration-300
+                    hover:bg-yellow-400 hover:scale-125"
+                  data-index={index}
+                  aria-label={`Go to slide ${index + 1}`}
+                >
+                </button>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
     <!-- Story Section - Two Column with Overlapping Image -->
-    <section class="py-sections-xs bg-neutral-900 overflow-hidden animate-section">
+    <section id="story" class="py-sections-xs bg-neutral-900 overflow-hidden">
       <div class="max-w-[1400px] mx-auto px-4 md:px-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 items-center">
           <!-- Left Column: Text Card -->
-          <div class="relative z-10 lg:pr-20">
+          <div class="relative z-10 lg:pr-20 story-text-card">
             <div class="bg-zinc-800/90 backdrop-blur-sm border border-zinc-700 rounded-radius-lg p-8 md:p-12 lg:p-16">
               <h2 class="text-display-10 md:text-display-11 lg:text-[64px] font-oswald font-bold text-white uppercase mb-8 leading-[1.1]">
                 LA HISORIA SOBRE <br />NOSOTROS
@@ -83,7 +185,7 @@ const values = [
           </div>
 
           <!-- Right Column: Image (Overlapping) -->
-          <div class="relative lg:-ml-32 mt-8 lg:mt-0">
+          <div class="relative lg:-ml-32 mt-8 lg:mt-0 story-image">
             <div class="relative overflow-hidden rounded-radius-lg shadow-2xl">
               <Image
                 src={AboutImage}
@@ -195,11 +297,288 @@ const values = [
   <Footer />
 
   <script>
-    import { initScrollAnimations } from '../utils/animations';
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    class AboutPageAnimations {
+      private currentSlideIndex: number = 0;
+      private slides: HTMLElement[];
+      private track: HTMLElement;
+      private dots: HTMLElement[];
+      private autoplayInterval: number | null = null;
+      private slideHeight: number = 0;
+
+      constructor() {
+        this.track = document.getElementById('carousel-track') as HTMLElement;
+        this.slides = Array.from(document.querySelectorAll('.carousel-slide'));
+        this.dots = Array.from(document.querySelectorAll('.carousel-dot'));
+
+        this.init();
+      }
+
+      init() {
+        // Hero entrance animations
+        this.animateHero();
+
+        // Initialize vertical carousel
+        if (this.slides.length > 0) {
+          this.initCarousel();
+        }
+
+        // Progressive scroll animations
+        this.initScrollAnimations();
+      }
+
+      animateHero() {
+        const heroContent = document.querySelector('.hero-content');
+        const heroCarousel = document.querySelector('.hero-carousel');
+
+        // Animate hero content from left
+        gsap.to(heroContent, {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: 'power3.out',
+          delay: 0.3,
+        });
+
+        // Animate carousel from right
+        gsap.to(heroCarousel, {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: 'power3.out',
+          delay: 0.5,
+        });
+
+        // Set initial positions
+        gsap.set(heroContent, { x: -50 });
+        gsap.set(heroCarousel, { x: 50 });
+      }
+
+      initCarousel() {
+        // Calculate slide height
+        this.slideHeight = this.slides[0].offsetHeight + 24; // 24px gap
+
+        // Position all slides
+        this.slides.forEach((slide, index) => {
+          gsap.set(slide, { y: index * this.slideHeight });
+        });
+
+        // Set initial active dot
+        this.updateDots();
+
+        // Dot click handlers
+        this.dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => this.goToSlide(index));
+        });
+
+        // Start autoplay
+        this.startAutoplay();
+
+        // Pause on hover
+        const carouselContainer = document.querySelector('.carousel-container');
+        carouselContainer?.addEventListener('mouseenter', () => this.stopAutoplay());
+        carouselContainer?.addEventListener('mouseleave', () => this.startAutoplay());
+      }
+
+      goToSlide(index: number) {
+        if (index === this.currentSlideIndex) return;
+
+        this.currentSlideIndex = index;
+        const offset = -index * this.slideHeight;
+
+        // Animate track
+        gsap.to(this.track, {
+          y: offset,
+          duration: 0.8,
+          ease: 'power3.out',
+        });
+
+        this.updateDots();
+      }
+
+      next() {
+        const nextIndex = (this.currentSlideIndex + 1) % this.slides.length;
+        this.goToSlide(nextIndex);
+      }
+
+      updateDots() {
+        this.dots.forEach((dot, index) => {
+          if (index === this.currentSlideIndex) {
+            gsap.to(dot, {
+              backgroundColor: '#FACC15', // yellow-400
+              scale: 1.25,
+              duration: 0.3,
+            });
+          } else {
+            gsap.to(dot, {
+              backgroundColor: '#3f3f46', // zinc-700
+              scale: 1,
+              duration: 0.3,
+            });
+          }
+        });
+      }
+
+      startAutoplay() {
+        if (this.autoplayInterval) return;
+        this.autoplayInterval = window.setInterval(() => {
+          this.next();
+        }, 3000); // 3 seconds
+      }
+
+      stopAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+          this.autoplayInterval = null;
+        }
+      }
+
+      initScrollAnimations() {
+        // Story section - Text card
+        gsap.fromTo('.story-text-card',
+          { opacity: 0, x: -80 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '.story-text-card',
+              start: 'top 80%',
+              once: true,
+            }
+          }
+        );
+
+        // Story section - Image
+        gsap.fromTo('.story-image',
+          { opacity: 0, x: 80 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '.story-image',
+              start: 'top 80%',
+              once: true,
+            }
+          }
+        );
+
+        // Values section - Title and description
+        gsap.fromTo('.animate-section h2, .animate-section > div > p',
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            stagger: 0.2,
+            scrollTrigger: {
+              trigger: '.animate-section',
+              start: 'top 75%',
+              once: true,
+            }
+          }
+        );
+
+        // Value cards - Staggered animation
+        gsap.fromTo('.card-item',
+          { opacity: 0, y: 50, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: 'back.out(1.2)',
+            stagger: 0.15,
+            scrollTrigger: {
+              trigger: '.animate-cards',
+              start: 'top 75%',
+              once: true,
+            }
+          }
+        );
+
+        // Mission section
+        const missionSection = document.querySelector('.py-sections-xs.bg-yellow-400');
+        if (missionSection) {
+          gsap.fromTo(missionSection.querySelectorAll('h2, p'),
+            { opacity: 0, y: 40 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+              stagger: 0.2,
+              scrollTrigger: {
+                trigger: missionSection,
+                start: 'top 80%',
+                once: true,
+              }
+            }
+          );
+        }
+
+        // CTA section buttons
+        const ctaButtons = document.querySelectorAll('.py-20.bg-black a');
+        if (ctaButtons.length > 0) {
+          gsap.fromTo(ctaButtons,
+            { opacity: 0, y: 30, scale: 0.9 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              ease: 'back.out(1.5)',
+              stagger: 0.15,
+              scrollTrigger: {
+                trigger: '.py-20.bg-black',
+                start: 'top 85%',
+                once: true,
+              }
+            }
+          );
+        }
+      }
+    }
+
+    // Initialize when DOM is ready
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initScrollAnimations);
+      document.addEventListener('DOMContentLoaded', () => {
+        new AboutPageAnimations();
+      });
     } else {
-      initScrollAnimations();
+      new AboutPageAnimations();
     }
   </script>
+
+  <style>
+    #carousel-track {
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .hero-content,
+    .hero-carousel {
+      will-change: transform, opacity;
+    }
+
+    /* Smooth scrolling */
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
+    }
+  </style>
 </BaseLayout>
