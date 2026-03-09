@@ -29,26 +29,17 @@ const imageMap: Record<string, any> = {
 >
   <Header />
 
-  <main>
+  <main class="bg-black">
     <!-- Hero Section (matching Home Hero structure) -->
-<<<<<<< HEAD
-    <section class="bg-black text-white xl:p-0 md:pb-[400px] pb-[150px] overflow-hidden rounded-b-radius-xl pt-20 md:pt-56 relative">
-      <div class="xl:flex xl:flex-row justify-center items-center">
+    <section class="bg-black text-white xl:p-0 md:pb-[400px] pb-[150px] overflow-hidden rounded-b-radius-xl pt-20 md:pt-24 relative">
+      <div class="xl:flex xl:flex-row justify-center items-center p-0 md:p-[100px]">
         <Image
           alt="Iron Supplements - Productos Premium"
           src={ImageHeroProducts}
-          class="xl:max-h-[120vh] 2xl:max-h-[28vh] w-auto xl:opacity-100 opacity-40"
-=======
-    <section class="bg-black text-white xl:py-16 md:pb-[500px] pb-[250px] overflow-hidden rounded-b-radius-xl pt-20 md:pt-24 relative min-h-[600px] md:min-h-[700px] xl:min-h-[600px]">
-      <div class="xl:flex xl:flex-row justify-center items-center xl:gap-12">
-        <Image
-          alt="Iron Supplements - Productos Premium"
-          src={ImageHeroProducts}
-          class="xl:max-h-[70vh] 2xl:max-h-[60vh] w-auto xl:opacity-100 opacity-40"
->>>>>>> 4a88968657b0ae201ab194e8b45d28faac95d6e0
+          class="xl:max-h-[48vh] 2xl:max-h-[28vh] w-auto xl:opacity-100 opacity-40"
           loading="eager"
         />
-        <div class="flex flex-col items-center xl:max-w-[50%] gap-6 md:gap-10 xl:mt-0 mt-[-350px] md:mt-[-600px] relative z-40 px-4">
+        <div class="flex flex-col items-center xl:max-w-[50%] gap-6 md:gap-10 xl:mt-0 mt-[-500px] md:mt-[-700px] relative z-40 px-4">
           <h1 class="hero-title lg:text-[90px] lg:max-w-[50%] xl:max-w-[100%] text-display-mobile-12 md:text-display-10 leading-106 text-center font-oswald font-bold">
             NUESTROS PRODUCTOS
           </h1>
@@ -102,7 +93,7 @@ const imageMap: Record<string, any> = {
 
     <!-- Products Grid -->
     <section id="productos" class="py-sections-xs bg-neutral-900">
-      <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+      <div class="max-w-[1120px] mx-auto px-4 md:px-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 animate-cards">
           {sortedPrograms.map((program) => (
             <div class="card-item bg-zinc-800/50 backdrop-blur-sm rounded-radius-lg overflow-hidden
