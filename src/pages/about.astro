@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/header/Header.astro';
 import Footer from '../components/footer/Footer.astro';
+import { Image } from "astro:assets";
+import AboutImage from "../assets/images/about1.png";
 import '../styles/global.css';
 import '../styles/fonts.css';
 
@@ -35,7 +37,7 @@ const values = [
 >
   <Header />
 
-  <main class="pt-20 md:pt-24">
+  <main class="pt-20 md:pt-24 bg-neutral-900">
     <!-- Hero Section -->
     <section class="bg-black text-white py-20 md:py-32">
       <div class="max-w-container-treatments mx-auto px-4 md:px-10">
@@ -50,43 +52,98 @@ const values = [
       </div>
     </section>
 
-    <!-- Story Section -->
-    <section class="py-sections-xs bg-white animate-section">
-      <div class="max-w-4xl mx-auto px-4 md:px-10">
-        <div class="prose prose-lg max-w-none">
-          <p class="text-display-6 md:text-display-8 text-gray-700 mb-6 leading-relaxed">
-            Iron Supplements nació de una pasión: ayudar a las personas a alcanzar su máximo potencial físico. Comenzamos como una pequeña tienda local en Atizapán de Zaragoza, con la misión de proporcionar suplementos deportivos de la más alta calidad.
-          </p>
-          <p class="text-display-6 md:text-display-8 text-gray-700 mb-6 leading-relaxed">
-            Lo que nos distingue no es solo la calidad de nuestros productos, sino nuestro compromiso con cada cliente. Entendemos que cada persona tiene objetivos únicos, y por eso ofrecemos asesoría personalizada basada en ciencia y experiencia comprobada.
-          </p>
-          <p class="text-display-6 md:text-display-8 text-gray-700 leading-relaxed">
-            Hoy, después de más de 8 años, seguimos siendo fieles a esa misión original: proporcionar suplementos premium, asesoría experta y un servicio excepcional a cada uno de nuestros clientes.
-          </p>
+    <!-- Story Section - Two Column with Overlapping Image -->
+    <section class="py-sections-xs bg-neutral-900 overflow-hidden animate-section">
+      <div class="max-w-[1400px] mx-auto px-4 md:px-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 items-center">
+          <!-- Left Column: Text Card -->
+          <div class="relative z-10 lg:pr-20">
+            <div class="bg-zinc-800/90 backdrop-blur-sm border border-zinc-700 rounded-radius-lg p-8 md:p-12 lg:p-16">
+              <h2 class="text-display-10 md:text-display-11 lg:text-[64px] font-oswald font-bold text-white uppercase mb-8 leading-[1.1]">
+                THE STORY BEHIND<br />ABOUT US
+              </h2>
+
+              <div class="space-y-6">
+                <p class="text-display-6 md:text-display-7 text-gray-300 leading-relaxed">
+                  Iron Supplements nació de una pasión: ayudar a las personas a alcanzar su máximo potencial físico. Comenzamos como una pequeña tienda local en Atizapán de Zaragoza, con la misión de proporcionar suplementos deportivos de la más alta calidad.
+                </p>
+                <p class="text-display-6 md:text-display-7 text-gray-300 leading-relaxed">
+                  Lo que nos distingue no es solo la calidad de nuestros productos, sino nuestro compromiso con cada cliente. Entendemos que cada persona tiene objetivos únicos, y por eso ofrecemos asesoría personalizada basada en ciencia y experiencia comprobada.
+                </p>
+                <p class="text-display-6 md:text-display-7 text-gray-300 leading-relaxed">
+                  Hoy, después de más de 8 años, seguimos siendo fieles a esa misión original: proporcionar suplementos premium, asesoría experta y un servicio excepcional a cada uno de nuestros clientes.
+                </p>
+              </div>
+
+              <!-- Decorative Element -->
+              <div class="mt-8 pt-8 border-t border-yellow-400/30">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-1 bg-yellow-400"></div>
+                  <p class="text-display-4 md:text-display-5 text-yellow-400 font-oswald font-semibold uppercase tracking-wider">
+                    Since 2016
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Image (Overlapping) -->
+          <div class="relative lg:-ml-32 mt-8 lg:mt-0">
+            <div class="relative overflow-hidden rounded-radius-lg shadow-2xl">
+              <Image
+                src={AboutImage}
+                alt="Women exercising together - Iron Supplements team spirit"
+                class="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
+                loading="eager"
+              />
+
+              <!-- Overlay Gradient for Depth -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+
+              <!-- Stats Overlay -->
+              <div class="absolute bottom-6 left-6 right-6 bg-black/80 backdrop-blur-sm rounded-lg p-6 border border-yellow-400/30">
+                <div class="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <p class="text-display-9 md:text-display-10 font-oswald font-bold text-yellow-400">8+</p>
+                    <p class="text-display-3 md:text-display-4 text-gray-300 font-oswald uppercase">Años</p>
+                  </div>
+                  <div>
+                    <p class="text-display-9 md:text-display-10 font-oswald font-bold text-yellow-400">5K+</p>
+                    <p class="text-display-3 md:text-display-4 text-gray-300 font-oswald uppercase">Clientes</p>
+                  </div>
+                  <div>
+                    <p class="text-display-9 md:text-display-10 font-oswald font-bold text-yellow-400">100%</p>
+                    <p class="text-display-3 md:text-display-4 text-gray-300 font-oswald uppercase">Premium</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Values Section -->
-    <section class="py-sections-xs bg-gray-50 animate-section">
+    <section class="py-sections-xs bg-zinc-900 border-y border-zinc-800 animate-section">
       <div class="max-w-container-treatments mx-auto px-4 md:px-10">
         <div class="text-center mb-16">
-          <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-4">
+          <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-4">
             Nuestros Valores
           </h2>
-          <p class="text-display-6 text-gray-600 max-w-2xl mx-auto">
+          <p class="text-display-6 text-gray-400 max-w-2xl mx-auto">
             Los principios que guían cada decisión que tomamos
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-cards">
           {values.map((value, index) => (
-            <div class="card-item bg-white p-8 rounded-radius-lg hover:shadow-xl transition-all" data-index={index}>
+            <div class="card-item bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 p-8 rounded-radius-lg
+              hover:border-yellow-400/30 hover:shadow-2xl transition-all duration-500" data-index={index}>
               <div class="text-5xl mb-4">{value.icon}</div>
-              <h3 class="text-display-8 md:text-display-9 font-oswald font-bold text-black mb-3">
+              <h3 class="text-display-8 md:text-display-9 font-oswald font-bold text-white mb-3">
                 {value.title}
               </h3>
-              <p class="text-display-6 text-gray-600 leading-relaxed">
+              <p class="text-display-6 text-gray-400 leading-relaxed">
                 {value.description}
               </p>
             </div>
@@ -101,7 +158,7 @@ const values = [
         <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-6">
           Nuestra Misión
         </h2>
-        <p class="text-display-7 md:text-display-9 font-oswald text-gray-800 leading-relaxed">
+        <p class="text-display-7 md:text-display-9 font-oswald text-gray-900 leading-relaxed">
           "Proporcionar suplementos deportivos de calidad premium y asesoría experta para ayudar a cada persona a alcanzar su máximo potencial físico y superar sus límites."
         </p>
       </div>
@@ -119,13 +176,19 @@ const values = [
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="/programs"
-            class="bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-mid px-8 py-4 rounded-radius-sm transition-all hover:bg-yellow-300"
+            class="bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-mid
+              px-8 py-4 rounded-radius-sm
+              transition-all duration-300 ease-out
+              hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02]"
           >
             Ver Productos
           </a>
           <a
             href="/contact"
-            class="border-2 border-yellow-400 text-yellow-400 text-display-7 md:text-display-9 font-oswald font-mid px-8 py-4 rounded-radius-sm transition-all hover:bg-yellow-400 hover:text-black"
+            class="border-2 border-yellow-400 text-yellow-400 text-display-7 md:text-display-9 font-oswald font-mid
+              px-8 py-4 rounded-radius-sm
+              transition-all duration-300 ease-out
+              hover:bg-yellow-400 hover:text-black hover:shadow-lg hover:scale-[1.02]"
           >
             Contactar
           </a>
