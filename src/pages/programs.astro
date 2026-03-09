@@ -239,10 +239,12 @@ const imageMap: Record<string, any> = {
             const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
 
             if (isExpanded) {
+              // Just collapse this one
               this.collapse(trigger, content, icon);
             } else {
-              // Collapse all other accordions first
-              this.collapseAll();
+              // Collapse all other accordions (not this one)
+              this.collapseAllExcept(trigger);
+              // Then expand this one
               this.expand(trigger, content, icon);
             }
           });
@@ -311,12 +313,16 @@ const imageMap: Record<string, any> = {
         }
       }
 
-      collapseAll() {
+      collapseAllExcept(currentTrigger: HTMLButtonElement) {
         this.accordions.forEach((accordion) => {
           const trigger = accordion.querySelector('.accordion-trigger') as HTMLButtonElement;
           const content = accordion.querySelector('.accordion-content') as HTMLElement;
           const icon = accordion.querySelector('.accordion-icon') as HTMLElement;
 
+          // Skip if this is the current accordion being opened
+          if (trigger === currentTrigger) return;
+
+          // Only collapse if it's actually expanded
           if (trigger?.getAttribute('aria-expanded') === 'true') {
             this.collapse(trigger, content, icon);
           }
