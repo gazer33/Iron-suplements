@@ -9,6 +9,19 @@ const programsCollection = defineCollection({
     features: z.array(z.string()),
     image: z.string(),
     order: z.number(),
+    // Blog-style fields
+    heroImage: z.string().optional(),
+    category: z.string().optional(),
+    benefits: z.array(z.string()).optional(),
+    usage: z.string().optional(),
+    dosage: z.string().optional(),
+    scientificBacking: z.string().optional(),
+    imagePositions: z.object({
+      hero: z.string().optional(),
+      benefits: z.string().optional(),
+      usage: z.string().optional(),
+      scientific: z.string().optional(),
+    }).optional(),
   }),
 });
 

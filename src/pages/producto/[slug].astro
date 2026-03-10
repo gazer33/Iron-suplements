@@ -1,0 +1,480 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/header/Header.astro';
+import Footer from '../../components/footer/Footer.astro';
+import { Image } from "astro:assets";
+import '../../styles/global.css';
+import '../../styles/fonts.css';
+
+export async function getStaticPaths() {
+  const programs = await getCollection('programs');
+  return programs.map((program) => ({
+    params: { slug: program.slug },
+    props: { program },
+  }));
+}
+
+const { program } = Astro.props;
+const { Content } = await program.render();
+
+// Image placeholders
+const heroImagePlaceholder = program.data.heroImage || program.data.image;
+---
+
+<BaseLayout
+  title={`${program.data.title} - Iron Supplements`}
+  description={program.data.description}
+>
+  <Header />
+
+  <main class="bg-black">
+    <!-- Hero Section - Blog Style with SVG -->
+    <section class="bg-black text-white py-16 md:py-24 lg:py-32 overflow-hidden pt-20 md:pt-24 relative">
+      <div class="max-w-[1400px] mx-auto px-4 md:px-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          <!-- Left Column: Content -->
+          <div class="hero-content opacity-0 space-y-8 relative z-10">
+            <div>
+              <!-- Category Badge -->
+              <div class="inline-block mb-4">
+                <span class="bg-yellow-400/10 text-yellow-400 px-4 py-2 rounded-full text-display-5 md:text-display-6 font-oswald uppercase tracking-wider border border-yellow-400/30">
+                  {program.data.category || "Suplemento"}
+                </span>
+              </div>
+
+              <!-- Title -->
+              <h1 class="hero-title text-display-11 md:text-display-12 lg:text-[80px] font-oswald font-bold mb-6 leading-106">
+                <span class="text-yellow-400">{program.data.icon}</span><br />
+                {program.data.title}
+              </h1>
+
+              <!-- Description -->
+              <p class="text-display-6 md:text-display-8 text-gray-300 leading-relaxed max-w-xl">
+                {program.data.description}
+              </p>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="#beneficios"
+                class="hero-button inline-flex items-center justify-center
+                  bg-yellow-400 text-black
+                  px-8 py-4 rounded-lg
+                  font-oswald font-semibold text-display-6 md:text-display-7
+                  transition-all duration-300 ease-out
+                  hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02]
+                  focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              >
+                Ver Beneficios
+              </a>
+              <a
+                href="/contact"
+                class="hero-button inline-flex items-center justify-center
+                  border-2 border-yellow-400 text-yellow-400
+                  px-8 py-4 rounded-lg
+                  font-oswald font-semibold text-display-6 md:text-display-7
+                  transition-all duration-300 ease-out
+                  hover:bg-yellow-400 hover:text-black hover:shadow-lg hover:scale-[1.02]
+                  focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              >
+                Consultar Disponibilidad
+              </a>
+            </div>
+
+            <!-- Quick Features -->
+            <div class="grid grid-cols-2 gap-4 pt-6 border-t border-zinc-800">
+              {program.data.features.slice(0, 4).map((feature: string) => (
+                <div class="flex items-start gap-2 stat-item">
+                  <svg class="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <p class="text-display-4 md:text-display-5 text-gray-300">{feature}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Right Column: SVG + Image Placeholder -->
+          <div class="hero-svg opacity-0 relative">
+            <div class="relative">
+              <!-- Image Placeholder for Hero -->
+              <div class="relative z-10 bg-zinc-900 rounded-2xl p-8 border-2 border-zinc-800 shadow-2xl">
+                <div class="aspect-square bg-gradient-to-br from-yellow-400/20 to-zinc-900 rounded-xl flex items-center justify-center">
+                  <div class="text-center">
+                    <div class="text-8xl mb-4">{program.data.icon}</div>
+                    <p class="text-gray-500 text-display-5">
+                      Imagen Hero del Producto<br />
+                      (heroImage placeholder)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decorative SVG Elements -->
+              <svg class="absolute -top-8 -left-8 w-32 h-32 text-yellow-400/20" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+                <circle cx="50" cy="50" r="30" stroke="currentColor" stroke-width="2"/>
+                <circle cx="50" cy="50" r="20" stroke="currentColor" stroke-width="2" stroke-dasharray="8 8"/>
+              </svg>
+
+              <svg class="absolute -bottom-8 -right-8 w-40 h-40 text-yellow-400/20" viewBox="0 0 100 100" fill="none">
+                <path d="M50 10 L90 90 L10 90 Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M50 20 L80 80 L20 80 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+              </svg>
+
+              <!-- Decorative Blur -->
+              <div class="absolute -bottom-12 -right-12 w-48 h-48 bg-yellow-400/10 rounded-full blur-3xl"></div>
+              <div class="absolute -top-12 -left-12 w-40 h-40 bg-yellow-400/5 rounded-full blur-3xl"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="grid-blog" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#FACC15" stroke-width="0.5"/>
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#grid-blog)" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- Main Content Article -->
+    <article class="py-sections-xs bg-neutral-900">
+      <div class="max-w-4xl mx-auto px-4 md:px-10">
+        <!-- Intro Content -->
+        <div class="prose prose-invert prose-lg max-w-none mb-16 animate-section">
+          <Content />
+        </div>
+
+        <!-- Benefits Section with Image Placeholder -->
+        <section id="beneficios" class="mb-20 animate-section">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Benefits Content -->
+            <div class="order-2 lg:order-1">
+              <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-6">
+                Beneficios Principales
+              </h2>
+              <ul class="space-y-4">
+                {program.data.benefits ? program.data.benefits.map((benefit: string) => (
+                  <li class="flex items-start gap-3 text-display-5 md:text-display-6 text-gray-300">
+                    <svg class="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>{benefit}</span>
+                  </li>
+                )) : program.data.features.map((feature: string) => (
+                  <li class="flex items-start gap-3 text-display-5 md:text-display-6 text-gray-300">
+                    <svg class="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Image Placeholder -->
+            <div class="order-1 lg:order-2">
+              <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8 aspect-square flex items-center justify-center">
+                <div class="text-center">
+                  <svg class="w-32 h-32 mx-auto mb-4 text-yellow-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <p class="text-gray-500 text-display-5">
+                    Imagen de Beneficios<br />
+                    (benefits image placeholder)
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Usage Section with Image -->
+        {program.data.usage && (
+          <section class="mb-20 animate-section">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <!-- Image Placeholder -->
+              <div>
+                <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8 aspect-video flex items-center justify-center">
+                  <div class="text-center">
+                    <svg class="w-32 h-32 mx-auto mb-4 text-yellow-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    <p class="text-gray-500 text-display-5">
+                      Imagen de Uso<br />
+                      (usage image placeholder)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Usage Content -->
+              <div>
+                <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-6">
+                  Cómo Usar
+                </h2>
+                <div class="prose prose-invert prose-lg max-w-none">
+                  <p class="text-display-5 md:text-display-6 text-gray-300 leading-relaxed">
+                    {program.data.usage}
+                  </p>
+                </div>
+
+                {program.data.dosage && (
+                  <div class="mt-6 p-6 bg-zinc-800/50 border border-yellow-400/30 rounded-lg">
+                    <h3 class="font-oswald font-bold text-display-7 text-yellow-400 mb-2 flex items-center gap-2">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                      </svg>
+                      Dosificación Recomendada
+                    </h3>
+                    <p class="text-display-5 text-gray-300">
+                      {program.data.dosage}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        <!-- Scientific Backing Section -->
+        {program.data.scientificBacking && (
+          <section class="mb-20 animate-section">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <!-- Scientific Content -->
+              <div>
+                <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-6 flex items-center gap-3">
+                  <svg class="w-8 h-8 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                  </svg>
+                  Respaldo Científico
+                </h2>
+                <div class="prose prose-invert prose-lg max-w-none">
+                  <p class="text-display-5 md:text-display-6 text-gray-300 leading-relaxed">
+                    {program.data.scientificBacking}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Image Placeholder -->
+              <div>
+                <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8 aspect-square flex items-center justify-center">
+                  <div class="text-center">
+                    <svg class="w-32 h-32 mx-auto mb-4 text-yellow-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <p class="text-gray-500 text-display-5">
+                      Imagen Científica<br />
+                      (scientific image placeholder)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+      </div>
+    </article>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-zinc-900 border-t border-zinc-800">
+      <div class="max-w-4xl mx-auto px-4 md:px-10 text-center animate-section">
+        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-6">
+          ¿Listo para Mejorar tu Rendimiento?
+        </h2>
+        <p class="text-display-6 md:text-display-8 text-gray-300 mb-8">
+          Contáctanos para obtener más información sobre {program.data.title}
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-yellow-400 text-black text-display-7 md:text-display-9 font-oswald font-mid
+            px-8 py-4 rounded-radius-sm
+            transition-all duration-300 ease-out
+            hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02]
+            focus:outline-none focus:ring-2 focus:ring-yellow-300"
+        >
+          Contactar Ahora
+        </a>
+      </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="py-16 bg-black">
+      <div class="max-w-[1400px] mx-auto px-4 md:px-10">
+        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-8 text-center">
+          Otros Productos
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <a href="/programs" class="group bg-zinc-800/50 backdrop-blur-sm p-6 rounded-radius-lg border border-zinc-700 hover:border-yellow-400/50 transition-all duration-300 text-center">
+            <div class="text-6xl mb-4">💪</div>
+            <h3 class="font-oswald font-bold text-display-8 text-white mb-2 group-hover:text-yellow-400 transition-colors">
+              Ver Todos los Productos
+            </h3>
+            <p class="text-display-5 text-gray-400">
+              Explora nuestra línea completa
+            </p>
+          </a>
+          <a href="/contact" class="group bg-zinc-800/50 backdrop-blur-sm p-6 rounded-radius-lg border border-zinc-700 hover:border-yellow-400/50 transition-all duration-300 text-center">
+            <div class="text-6xl mb-4">📞</div>
+            <h3 class="font-oswald font-bold text-display-8 text-white mb-2 group-hover:text-yellow-400 transition-colors">
+              Asesoría Personalizada
+            </h3>
+            <p class="text-display-5 text-gray-400">
+              Habla con nuestros expertos
+            </p>
+          </a>
+          <a href="/trainers" class="group bg-zinc-800/50 backdrop-blur-sm p-6 rounded-radius-lg border border-zinc-700 hover:border-yellow-400/50 transition-all duration-300 text-center">
+            <div class="text-6xl mb-4">👥</div>
+            <h3 class="font-oswald font-bold text-display-8 text-white mb-2 group-hover:text-yellow-400 transition-colors">
+              Nuestros Expertos
+            </h3>
+            <p class="text-display-5 text-gray-400">
+              Conoce al equipo
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    import { gsap } from 'gsap';
+    import { initScrollAnimations } from '../../utils/animations';
+
+    class ProductBlogAnimations {
+      constructor() {
+        this.init();
+      }
+
+      init() {
+        if (typeof window === 'undefined') return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+          gsap.set('.hero-content, .hero-svg', { opacity: 1 });
+          return;
+        }
+
+        this.animateHero();
+      }
+
+      animateHero() {
+        const heroContent = document.querySelector('.hero-content');
+        const heroSvg = document.querySelector('.hero-svg');
+        const heroTitle = document.querySelector('.hero-title');
+        const heroButtons = document.querySelectorAll('.hero-button');
+
+        if (!heroContent || !heroSvg) return;
+
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+        // Animate content from left
+        tl.fromTo(heroContent,
+          { opacity: 0, x: -60 },
+          { opacity: 1, x: 0, duration: 1 }
+        );
+
+        // Animate SVG/image from right
+        tl.fromTo(heroSvg,
+          { opacity: 0, x: 60, scale: 0.95 },
+          { opacity: 1, x: 0, scale: 1, duration: 1 },
+          '-=0.7'
+        );
+
+        // Animate title
+        if (heroTitle) {
+          tl.fromTo(heroTitle,
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.8, ease: 'back.out(1.5)' },
+            '-=0.8'
+          );
+        }
+
+        // Animate buttons
+        if (heroButtons.length > 0) {
+          tl.fromTo(heroButtons,
+            { opacity: 0, y: 20, scale: 0.9 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              stagger: 0.12,
+              ease: 'back.out(1.7)',
+            },
+            '-=0.4'
+          );
+        }
+
+        // Animate stats
+        const stats = document.querySelectorAll('.stat-item');
+        if (stats.length > 0) {
+          tl.fromTo(stats,
+            { opacity: 0, y: 15 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.08,
+              ease: 'power2.out',
+            },
+            '-=0.3'
+          );
+        }
+      }
+    }
+
+    // Initialize animations
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        new ProductBlogAnimations();
+        initScrollAnimations();
+      });
+    } else {
+      new ProductBlogAnimations();
+      initScrollAnimations();
+    }
+  </script>
+
+  <style>
+    .hero-content,
+    .hero-svg {
+      will-change: opacity, transform;
+    }
+
+    /* Prose styling for dark theme */
+    .prose-invert {
+      color: #d4d4d8;
+    }
+
+    .prose-invert h2,
+    .prose-invert h3,
+    .prose-invert h4 {
+      color: #ffffff;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+    }
+
+    .prose-invert p {
+      line-height: 1.8;
+    }
+
+    .prose-invert a {
+      color: #facc15;
+      text-decoration: underline;
+    }
+
+    .prose-invert a:hover {
+      color: #eab308;
+    }
+  </style>
+</BaseLayout>
