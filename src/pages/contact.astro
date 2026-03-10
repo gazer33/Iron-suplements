@@ -37,38 +37,144 @@ const contactMethods = [
 >
   <Header />
 
-  <main class="pt-20 md:pt-24">
-    <!-- Hero Section -->
-    <section class="bg-black text-white py-20 md:py-32">
-      <div class="max-w-container-treatments mx-auto px-4 md:px-10 text-center">
-        <h1 class="text-display-mobile-11 md:text-display-12 font-oswald font-bold mb-6 leading-106 animate-section">
-          Contáctanos
-        </h1>
-        <p class="text-display-6 md:text-display-8 text-gray-300 max-w-3xl mx-auto">
-          ¿Tienes preguntas? Nuestro equipo está listo para ayudarte a alcanzar tus objetivos
-        </p>
+  <main class="bg-black">
+    <!-- Hero Section - Interactive with SVG Graphics -->
+    <section class="bg-black text-white py-16 md:py-24 lg:py-32 overflow-hidden pt-20 md:pt-24 relative">
+      <div class="max-w-[1400px] mx-auto px-4 md:px-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          <!-- Left Column: Content -->
+          <div class="hero-content opacity-0 space-y-8 relative z-10">
+            <div>
+              <div class="inline-block mb-4">
+                <span class="bg-yellow-400/10 text-yellow-400 px-4 py-2 rounded-full text-display-5 md:text-display-6 font-oswald uppercase tracking-wider border border-yellow-400/30">
+                  Estamos Aquí
+                </span>
+              </div>
+              <h1 class="hero-title text-display-11 md:text-display-12 lg:text-[80px] font-oswald font-bold mb-6 leading-106">
+                HABLEMOS<br />
+                DE TUS<br />
+                <span class="text-yellow-400">OBJETIVOS</span>
+              </h1>
+              <p class="text-display-6 md:text-display-8 text-gray-300 leading-relaxed max-w-xl">
+                ¿Tienes preguntas sobre suplementación, nutrición o nuestros productos? Nuestro equipo de expertos está listo para ayudarte
+              </p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-zinc-800">
+              <div class="stat-item text-center">
+                <p class="text-display-9 md:text-display-10 font-oswald font-bold text-yellow-400">24h</p>
+                <p class="text-display-3 md:text-display-4 text-gray-400 uppercase">Respuesta</p>
+              </div>
+              <div class="stat-item text-center">
+                <p class="text-display-9 md:text-display-10 font-oswald font-bold text-yellow-400">100%</p>
+                <p class="text-display-3 md:text-display-4 text-gray-400 uppercase">Gratis</p>
+              </div>
+              <div class="stat-item text-center">
+                <p class="text-display-9 md:text-display-10 font-oswald font-bold text-yellow-400">24/7</p>
+                <p class="text-display-3 md:text-display-4 text-gray-400 uppercase">Soporte</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: SVG Illustration -->
+          <div class="hero-svg opacity-0 relative">
+            <div class="relative">
+              <!-- Main Contact SVG Illustration -->
+              <div class="relative z-10 flex items-center justify-center">
+                <svg class="w-full max-w-md h-auto" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Background Circle -->
+                  <circle cx="200" cy="200" r="180" fill="url(#gradient1)" opacity="0.1"/>
+
+                  <!-- Envelope Base -->
+                  <path d="M80 140 L200 220 L320 140 L320 280 L80 280 Z" fill="#27272A" stroke="#FACC15" stroke-width="3" class="envelope-body"/>
+
+                  <!-- Envelope Flap -->
+                  <path d="M80 140 L200 220 L320 140 L200 80 Z" fill="#18181B" stroke="#FACC15" stroke-width="3" class="envelope-flap"/>
+
+                  <!-- Message Lines -->
+                  <line x1="120" y1="200" x2="280" y2="200" stroke="#FACC15" stroke-width="2" opacity="0.6" class="message-line-1"/>
+                  <line x1="120" y1="220" x2="250" y2="220" stroke="#FACC15" stroke-width="2" opacity="0.4" class="message-line-2"/>
+                  <line x1="120" y1="240" x2="270" y2="240" stroke="#FACC15" stroke-width="2" opacity="0.3" class="message-line-3"/>
+
+                  <!-- Floating Icons -->
+                  <g class="floating-icon-1">
+                    <circle cx="100" cy="100" r="20" fill="#FACC15" opacity="0.2"/>
+                    <path d="M95 100 L100 105 L110 90" stroke="#FACC15" stroke-width="2" fill="none"/>
+                  </g>
+
+                  <g class="floating-icon-2">
+                    <circle cx="300" cy="120" r="18" fill="#FACC15" opacity="0.2"/>
+                    <text x="300" y="128" text-anchor="middle" fill="#FACC15" font-size="20">💬</text>
+                  </g>
+
+                  <g class="floating-icon-3">
+                    <circle cx="90" cy="300" r="16" fill="#FACC15" opacity="0.2"/>
+                    <text x="90" y="308" text-anchor="middle" fill="#FACC15" font-size="18">📱</text>
+                  </g>
+
+                  <g class="floating-icon-4">
+                    <circle cx="310" cy="290" r="22" fill="#FACC15" opacity="0.2"/>
+                    <text x="310" y="300" text-anchor="middle" fill="#FACC15" font-size="24">📍</text>
+                  </g>
+
+                  <defs>
+                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#FACC15;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#EAB308;stop-opacity:1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+
+              <!-- Decorative Elements -->
+              <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-yellow-400/10 rounded-full blur-3xl"></div>
+              <div class="absolute -top-8 -left-8 w-32 h-32 bg-yellow-400/5 rounded-full blur-3xl"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#FACC15" stroke-width="0.5"/>
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
       </div>
     </section>
 
     <!-- Contact Methods -->
-    <section class="py-16 bg-white animate-section">
+    <section class="py-16 bg-neutral-900 animate-section">
       <div class="max-w-container-treatments mx-auto px-4 md:px-10">
+        <div class="text-center mb-12">
+          <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-4">
+            Formas de Contacto
+          </h2>
+          <p class="text-display-6 text-gray-400">
+            Elige la forma más cómoda para ti
+          </p>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-cards">
           {contactMethods.map((method, index) => (
             <a
               href={method.link}
-              class="card-item group bg-gray-50 p-8 rounded-radius-lg hover:shadow-xl transition-all text-center"
+              class="card-item group bg-zinc-800/50 backdrop-blur-sm p-8 rounded-radius-lg border border-zinc-700 hover:border-yellow-400/50 transition-all duration-300 text-center"
               data-index={index}
             >
               <div class="flex justify-center mb-4">
-                <div class="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div class="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                   <Icon icon={method.icon} iconClass="w-8 h-8" />
                 </div>
               </div>
-              <h3 class="font-oswald font-bold text-display-8 text-black mb-2">
+              <h3 class="font-oswald font-bold text-display-8 text-white mb-2 group-hover:text-yellow-400 transition-colors">
                 {method.title}
               </h3>
-              <p class="text-display-5 md:text-display-6 text-gray-600 group-hover:text-yellow-600 transition-colors">
+              <p class="text-display-5 md:text-display-6 text-gray-400 group-hover:text-gray-300 transition-colors">
                 {method.value}
               </p>
             </a>
@@ -78,17 +184,17 @@ const contactMethods = [
     </section>
 
     <!-- Contact Form & Info -->
-    <section class="py-sections-xs bg-gray-50">
+    <section class="py-sections-xs bg-zinc-900">
       <div class="max-w-container-treatments mx-auto px-4 md:px-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <!-- Contact Form -->
           <div class="animate-section">
-            <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-6">
+            <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-6">
               Envíanos un Mensaje
             </h2>
-            <form class="space-y-6" id="contact-form">
-              <div>
-                <label for="name" class="block text-display-6 font-semibold text-gray-700 mb-2">
+            <form class="space-y-6 form-container" id="contact-form">
+              <div class="form-field">
+                <label for="name" class="block text-display-6 font-semibold text-gray-300 mb-2">
                   Nombre Completo *
                 </label>
                 <input
@@ -96,13 +202,13 @@ const contactMethods = [
                   id="name"
                   name="name"
                   required
-                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5"
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-zinc-700 bg-zinc-800/50 text-white focus:border-yellow-400 focus:bg-zinc-800 focus:outline-none transition-all text-display-5"
                   placeholder="Tu nombre"
                 />
               </div>
 
-              <div>
-                <label for="email" class="block text-display-6 font-semibold text-gray-700 mb-2">
+              <div class="form-field">
+                <label for="email" class="block text-display-6 font-semibold text-gray-300 mb-2">
                   Email *
                 </label>
                 <input
@@ -110,33 +216,33 @@ const contactMethods = [
                   id="email"
                   name="email"
                   required
-                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5"
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-zinc-700 bg-zinc-800/50 text-white focus:border-yellow-400 focus:bg-zinc-800 focus:outline-none transition-all text-display-5"
                   placeholder="tu@email.com"
                 />
               </div>
 
-              <div>
-                <label for="phone" class="block text-display-6 font-semibold text-gray-700 mb-2">
+              <div class="form-field">
+                <label for="phone" class="block text-display-6 font-semibold text-gray-300 mb-2">
                   Teléfono
                 </label>
                 <input
                   type="tel"
                   id="phone"
                   name="phone"
-                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5"
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-zinc-700 bg-zinc-800/50 text-white focus:border-yellow-400 focus:bg-zinc-800 focus:outline-none transition-all text-display-5"
                   placeholder="+52 55 1234 5678"
                 />
               </div>
 
-              <div>
-                <label for="subject" class="block text-display-6 font-semibold text-gray-700 mb-2">
+              <div class="form-field">
+                <label for="subject" class="block text-display-6 font-semibold text-gray-300 mb-2">
                   Asunto *
                 </label>
                 <select
                   id="subject"
                   name="subject"
                   required
-                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5"
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-zinc-700 bg-zinc-800/50 text-white focus:border-yellow-400 focus:bg-zinc-800 focus:outline-none transition-all text-display-5"
                 >
                   <option value="">Selecciona un tema</option>
                   <option value="asesoría">Asesoría Personalizada</option>
@@ -146,8 +252,8 @@ const contactMethods = [
                 </select>
               </div>
 
-              <div>
-                <label for="message" class="block text-display-6 font-semibold text-gray-700 mb-2">
+              <div class="form-field">
+                <label for="message" class="block text-display-6 font-semibold text-gray-300 mb-2">
                   Mensaje *
                 </label>
                 <textarea
@@ -155,14 +261,14 @@ const contactMethods = [
                   name="message"
                   required
                   rows="5"
-                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors text-display-5 resize-none"
+                  class="w-full px-4 py-3 rounded-radius-sm border-2 border-zinc-700 bg-zinc-800/50 text-white focus:border-yellow-400 focus:bg-zinc-800 focus:outline-none transition-all text-display-5 resize-none"
                   placeholder="Cuéntanos cómo podemos ayudarte..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                class="w-full bg-yellow-400 text-black text-display-7 md:text-display-8 font-oswald font-mid py-4 rounded-radius-sm transition-all hover:bg-black hover:text-yellow-400 border-2 border-transparent hover:border-yellow-400"
+                class="w-full bg-yellow-400 text-black text-display-7 md:text-display-8 font-oswald font-mid py-4 rounded-radius-sm transition-all duration-300 hover:bg-yellow-300 hover:shadow-lg hover:scale-[1.02] border-2 border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-300"
               >
                 Enviar Mensaje
               </button>
@@ -176,72 +282,85 @@ const contactMethods = [
           <!-- Info & Hours -->
           <div class="space-y-8">
             <div class="animate-section">
-              <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-6">
+              <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-6">
                 Información
               </h2>
-              <div class="bg-white p-8 rounded-radius-lg space-y-6">
+              <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 p-8 rounded-radius-lg space-y-6">
                 <div>
-                  <h3 class="font-oswald font-bold text-display-7 text-black mb-3">
+                  <h3 class="font-oswald font-bold text-display-7 text-white mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                    </svg>
                     Horario de Atención
                   </h3>
-                  <ul class="space-y-2 text-display-5 text-gray-600">
+                  <ul class="space-y-2 text-display-5 text-gray-300">
                     <li class="flex justify-between">
                       <span class="font-semibold">Martes - Viernes:</span>
-                      <span>9:00 AM - 8:00 PM</span>
+                      <span class="text-yellow-400">9:00 AM - 8:00 PM</span>
                     </li>
                     <li class="flex justify-between">
                       <span class="font-semibold">Sábado - Domingo:</span>
-                      <span>10:00 AM - 6:00 PM</span>
+                      <span class="text-yellow-400">10:00 AM - 6:00 PM</span>
                     </li>
                     <li class="flex justify-between">
                       <span class="font-semibold">Lunes:</span>
-                      <span class="text-red-600">Cerrado</span>
+                      <span class="text-red-400">Cerrado</span>
                     </li>
                   </ul>
                 </div>
 
-                <div class="pt-6 border-t border-gray-200">
-                  <h3 class="font-oswald font-bold text-display-7 text-black mb-3">
+                <div class="pt-6 border-t border-zinc-700">
+                  <h3 class="font-oswald font-bold text-display-7 text-white mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                    </svg>
                     Visítanos
                   </h3>
-                  <p class="text-display-5 text-gray-600 mb-4">
+                  <p class="text-display-5 text-gray-300 mb-4">
                     Av. Mirasol, Jaral<br/>
                     Atizapán de Zaragoza<br/>
                     Estado de México
                   </p>
                   <a
                     href="#map"
-                    class="inline-block text-yellow-600 hover:text-yellow-700 font-semibold text-display-5 underline"
+                    class="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 font-semibold text-display-5 transition-colors"
                   >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
                     Ver en el mapa
                   </a>
                 </div>
 
-                <div class="pt-6 border-t border-gray-200">
-                  <h3 class="font-oswald font-bold text-display-7 text-black mb-3">
+                <div class="pt-6 border-t border-zinc-700">
+                  <h3 class="font-oswald font-bold text-display-7 text-white mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
+                      <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
+                    </svg>
                     Síguenos
                   </h3>
                   <div class="flex gap-4">
                     <a
                       href="#"
                       aria-label="Facebook"
-                      class="w-12 h-12 rounded-full bg-gray-200 hover:bg-yellow-400 flex items-center justify-center transition-all"
+                      class="w-12 h-12 rounded-full bg-zinc-700 hover:bg-yellow-400 flex items-center justify-center transition-all duration-300 group"
                     >
-                      <span class="text-xl">f</span>
+                      <span class="text-xl text-gray-300 group-hover:text-black">f</span>
                     </a>
                     <a
                       href="#"
                       aria-label="Instagram"
-                      class="w-12 h-12 rounded-full bg-gray-200 hover:bg-yellow-400 flex items-center justify-center transition-all"
+                      class="w-12 h-12 rounded-full bg-zinc-700 hover:bg-yellow-400 flex items-center justify-center transition-all duration-300 group"
                     >
-                      <span class="text-xl">ig</span>
+                      <span class="text-xl text-gray-300 group-hover:text-black">ig</span>
                     </a>
                     <a
                       href="#"
                       aria-label="WhatsApp"
-                      class="w-12 h-12 rounded-full bg-gray-200 hover:bg-yellow-400 flex items-center justify-center transition-all"
+                      class="w-12 h-12 rounded-full bg-zinc-700 hover:bg-yellow-400 flex items-center justify-center transition-all duration-300 group"
                     >
-                      <span class="text-xl">wa</span>
+                      <span class="text-xl text-gray-300 group-hover:text-black">wa</span>
                     </a>
                   </div>
                 </div>
@@ -253,12 +372,12 @@ const contactMethods = [
     </section>
 
     <!-- Map Section -->
-    <section id="map" class="py-16 bg-white">
+    <section id="map" class="py-16 bg-black border-t border-zinc-800">
       <div class="max-w-container-treatments mx-auto px-4 md:px-10">
-        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-black mb-8 text-center">
+        <h2 class="text-display-10 md:text-display-11 font-oswald font-bold text-white mb-8 text-center animate-section">
           Encuéntranos Aquí
         </h2>
-        <div class="rounded-radius-lg overflow-hidden h-96 bg-gray-200">
+        <div class="rounded-radius-lg overflow-hidden h-96 bg-zinc-900 border-2 border-zinc-800 shadow-2xl animate-section">
           <iframe
             src="https://www.google.com/maps?q=19.604105138604858,-99.22363568834344&hl=es&z=17&output=embed"
             width="100%"
@@ -277,23 +396,259 @@ const contactMethods = [
   <Footer />
 
   <script>
+    import { gsap } from 'gsap';
     import { initScrollAnimations } from '../utils/animations';
 
-    // Initialize animations
+    class ContactPageAnimations {
+      constructor() {
+        this.init();
+      }
+
+      init() {
+        if (typeof window === 'undefined') return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+          // Show all elements immediately if user prefers reduced motion
+          gsap.set('.hero-content, .hero-svg', { opacity: 1 });
+          return;
+        }
+
+        this.animateHero();
+        this.animateSVG();
+        this.animateFormFields();
+      }
+
+      animateHero() {
+        const heroContent = document.querySelector('.hero-content');
+        const heroSvg = document.querySelector('.hero-svg');
+        const heroTitle = document.querySelector('.hero-title');
+
+        if (!heroContent || !heroSvg) return;
+
+        // Create timeline for hero entrance
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+        // Animate content from left
+        tl.fromTo(heroContent,
+          { opacity: 0, x: -60 },
+          { opacity: 1, x: 0, duration: 1 }
+        );
+
+        // Animate SVG from right
+        tl.fromTo(heroSvg,
+          { opacity: 0, x: 60 },
+          { opacity: 1, x: 0, duration: 1 },
+          '-=0.7'
+        );
+
+        // Animate title with scale effect
+        if (heroTitle) {
+          tl.fromTo(heroTitle,
+            { opacity: 0, y: 30, scale: 0.95 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'back.out(1.5)' },
+            '-=0.8'
+          );
+        }
+
+        // Animate stats
+        const stats = document.querySelectorAll('.stat-item');
+        if (stats.length > 0) {
+          tl.fromTo(stats,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: 'back.out(1.5)',
+            },
+            '-=0.4'
+          );
+        }
+      }
+
+      animateSVG() {
+        // Animate envelope flap
+        gsap.fromTo('.envelope-flap',
+          { y: -20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: 1.5,
+            ease: 'elastic.out(1, 0.5)',
+          }
+        );
+
+        // Animate message lines sequentially
+        gsap.fromTo('.message-line-1',
+          { scaleX: 0, transformOrigin: 'left' },
+          { scaleX: 1, duration: 0.6, delay: 2, ease: 'power2.out' }
+        );
+        gsap.fromTo('.message-line-2',
+          { scaleX: 0, transformOrigin: 'left' },
+          { scaleX: 1, duration: 0.6, delay: 2.2, ease: 'power2.out' }
+        );
+        gsap.fromTo('.message-line-3',
+          { scaleX: 0, transformOrigin: 'left' },
+          { scaleX: 1, duration: 0.6, delay: 2.4, ease: 'power2.out' }
+        );
+
+        // Floating animations for icons
+        this.floatingIcon('.floating-icon-1', 2, 0);
+        this.floatingIcon('.floating-icon-2', 2.5, 0.5);
+        this.floatingIcon('.floating-icon-3', 3, 1);
+        this.floatingIcon('.floating-icon-4', 2.2, 1.5);
+      }
+
+      floatingIcon(selector: string, duration: number, delay: number) {
+        gsap.to(selector, {
+          y: -15,
+          duration: duration,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: delay,
+        });
+
+        gsap.to(selector, {
+          rotation: 5,
+          duration: duration * 0.8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: delay,
+        });
+      }
+
+      animateFormFields() {
+        const formFields = document.querySelectorAll('.form-field');
+
+        if (formFields.length === 0) return;
+
+        // Stagger animation for form fields
+        gsap.fromTo(formFields,
+          { opacity: 0, x: -30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.form-container',
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        );
+
+        // Add focus animation to inputs
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach((input) => {
+          input.addEventListener('focus', () => {
+            gsap.to(input, {
+              scale: 1.02,
+              duration: 0.2,
+              ease: 'power2.out',
+            });
+          });
+
+          input.addEventListener('blur', () => {
+            gsap.to(input, {
+              scale: 1,
+              duration: 0.2,
+              ease: 'power2.out',
+            });
+          });
+        });
+      }
+    }
+
+    // Initialize animations when DOM is ready
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initScrollAnimations);
+      document.addEventListener('DOMContentLoaded', () => {
+        new ContactPageAnimations();
+        initScrollAnimations();
+      });
     } else {
+      new ContactPageAnimations();
       initScrollAnimations();
     }
 
-    // Form submission handler
+    // Form submission handler with animation
     const form = document.getElementById('contact-form') as HTMLFormElement;
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
-        form.reset();
+
+        const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+        // Animate button
+        gsap.to(submitButton, {
+          scale: 0.95,
+          duration: 0.1,
+          yoyo: true,
+          repeat: 1,
+          onComplete: () => {
+            alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+            form.reset();
+
+            // Reset form fields animation
+            gsap.fromTo('.form-field',
+              { opacity: 0.5 },
+              { opacity: 1, duration: 0.3 }
+            );
+          }
+        });
       });
     }
   </script>
+
+  <style>
+    .hero-content,
+    .hero-svg {
+      will-change: opacity, transform;
+    }
+
+    .form-field {
+      will-change: opacity, transform;
+    }
+
+    /* SVG Animation optimization */
+    .envelope-flap,
+    .envelope-body,
+    .message-line-1,
+    .message-line-2,
+    .message-line-3 {
+      will-change: transform, opacity;
+    }
+
+    .floating-icon-1,
+    .floating-icon-2,
+    .floating-icon-3,
+    .floating-icon-4 {
+      will-change: transform;
+    }
+
+    /* Input focus effects */
+    input:focus,
+    textarea:focus,
+    select:focus {
+      box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+    }
+
+    /* Placeholder styling for dark theme */
+    input::placeholder,
+    textarea::placeholder {
+      color: #71717a;
+    }
+
+    /* Select option styling */
+    select option {
+      background-color: #27272a;
+      color: white;
+    }
+  </style>
 </BaseLayout>
