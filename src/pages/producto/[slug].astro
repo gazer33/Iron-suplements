@@ -348,7 +348,11 @@ const heroImagePlaceholder = program.data.heroImage || program.data.image;
 
   <script>
     import { gsap } from 'gsap';
+    import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
     import { initScrollAnimations } from '../../utils/animations';
+
+    // Register GSAP plugins
+    gsap.registerPlugin(ScrollToPlugin);
 
     class ProductBlogAnimations {
       constructor() {
@@ -365,6 +369,7 @@ const heroImagePlaceholder = program.data.heroImage || program.data.image;
         }
 
         this.animateHero();
+        this.initSmoothScroll();
       }
 
       animateHero() {
@@ -429,6 +434,27 @@ const heroImagePlaceholder = program.data.heroImage || program.data.image;
             },
             '-=0.3'
           );
+        }
+      }
+
+      initSmoothScroll() {
+        // Smooth scroll for "Ver Beneficios" button
+        const benefitsButton = document.querySelector('a[href="#beneficios"]');
+        if (benefitsButton) {
+          benefitsButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector('#beneficios');
+            if (target) {
+              gsap.to(window, {
+                duration: 1.2,
+                scrollTo: {
+                  y: target,
+                  offsetY: 100, // Offset for fixed header
+                },
+                ease: 'power3.inOut',
+              });
+            }
+          });
         }
       }
     }
