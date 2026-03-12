@@ -60,9 +60,9 @@ import HamburgerMenu from "../../assets/icons/hamburger-icon.svg?raw";
 
         <div
           id="mobile-products-submenu"
-          class="grid max-h-0 grid-cols-1 overflow-hidden opacity-0 transition-all duration-300 ease-out"
+          class="grid h-0 grid-cols-1 overflow-hidden opacity-0"
         >
-          <div class="mt-3 flex flex-col items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-950/80 px-6 py-5 text-display-5 text-zinc-200">
+          <div class="flex flex-col items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-950/80 px-6 py-5 text-display-5 text-zinc-200">
             <a href="/programs" data-mobile-menu-close class="transition-opacity hover:opacity-70">All Products</a>
             <a href="/producto/protein" data-mobile-menu-close class="transition-opacity hover:opacity-70">Protein</a>
             <a href="/producto/creatine" data-mobile-menu-close class="transition-opacity hover:opacity-70">Creatine</a>
@@ -86,6 +86,8 @@ import HamburgerMenu from "../../assets/icons/hamburger-icon.svg?raw";
 </nav>
 
 <script>
+  import { gsap } from 'gsap';
+
   const siteNav = document.getElementById('site-nav');
   const hamburgerButton = document.getElementById('hamburger-button');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -95,18 +97,65 @@ import HamburgerMenu from "../../assets/icons/hamburger-icon.svg?raw";
   const mobileMenuLinks = document.querySelectorAll('[data-mobile-menu-close]');
 
   if (siteNav && hamburgerButton && mobileMenu && productsTrigger && productsSubmenu && productsArrow) {
+    const productsInner = productsSubmenu.firstElementChild;
+
+    if (!(productsInner instanceof HTMLElement)) {
+      throw new Error('Mobile products submenu content is missing.');
+    }
+
+    gsap.set(productsSubmenu, {
+      height: 0,
+      opacity: 0,
+      overflow: 'hidden',
+    });
+    gsap.set(productsInner, {
+      marginTop: 0,
+    });
+    gsap.set(productsArrow, {
+      rotate: 0,
+      transformOrigin: '50% 50%',
+    });
+
     const closeProducts = () => {
-      productsSubmenu.classList.remove('max-h-80', 'opacity-100');
-      productsSubmenu.classList.add('max-h-0', 'opacity-0');
-      productsArrow.classList.remove('rotate-180');
       productsTrigger.setAttribute('aria-expanded', 'false');
+      gsap.killTweensOf([productsSubmenu, productsInner, productsArrow]);
+      gsap.to(productsArrow, {
+        rotate: 0,
+        duration: 0.35,
+        ease: 'power2.out',
+      });
+      gsap.to(productsInner, {
+        marginTop: 0,
+        duration: 0.35,
+        ease: 'power2.out',
+      });
+      gsap.to(productsSubmenu, {
+        height: 0,
+        opacity: 0,
+        duration: 0.35,
+        ease: 'power2.inOut',
+      });
     };
 
     const openProducts = () => {
-      productsSubmenu.classList.remove('max-h-0', 'opacity-0');
-      productsSubmenu.classList.add('max-h-80', 'opacity-100');
-      productsArrow.classList.add('rotate-180');
       productsTrigger.setAttribute('aria-expanded', 'true');
+      gsap.killTweensOf([productsSubmenu, productsInner, productsArrow]);
+      gsap.to(productsArrow, {
+        rotate: 180,
+        duration: 0.35,
+        ease: 'power2.out',
+      });
+      gsap.to(productsSubmenu, {
+        height: productsInner.offsetHeight,
+        opacity: 1,
+        duration: 0.35,
+        ease: 'power2.inOut',
+      });
+      gsap.to(productsInner, {
+        marginTop: 12,
+        duration: 0.35,
+        ease: 'power2.out',
+      });
     };
 
     const closeMenu = () => {
@@ -158,6 +207,10 @@ import HamburgerMenu from "../../assets/icons/hamburger-icon.svg?raw";
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 1280) {
         closeMenu();
+      } else if (productsTrigger.getAttribute('aria-expanded') === 'true') {
+        gsap.set(productsSubmenu, {
+          height: productsInner.offsetHeight,
+        });
       }
     });
   }
