@@ -10,6 +10,10 @@ features:
   - "Mejora la síntesis proteica"
 image: "/src/assets/images/bcaa.png"
 heroImage: "/src/assets/images/bcaa-hero.png"
+imagePositions:
+  benefits: "/src/assets/images/benefits.jpg"
+  usage: "/src/assets/images/how-to-use.jpg"
+  scientific: "/src/assets/images/evidence.jpg"
 benefits:
   - "Acelera significativamente la recuperación muscular post-entrenamiento"
   - "Reduce el dolor muscular de aparición tard��a (DOMS) hasta en un 50%"

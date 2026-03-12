@@ -9,7 +9,11 @@ features:
   - "Aminoácidos esenciales completos"
   - "Variedad de sabores deliciosos"
 image: "/src/assets/images/protein.png"
-heroImage: "/src/assets/images/protein-hero.png"
+heroImage: "/src/assets/images/protein-SectionHero-Products.png"
+imagePositions:
+  benefits: "/src/assets/images/benefits.jpg"
+  usage: "/src/assets/images/how-to-use.jpg"
+  scientific: "/src/assets/images/evidence.jpg"
 benefits:
   - "Promueve el crecimiento y reparación muscular después del entrenamiento"
   - "Contiene todos los aminoácidos esenciales en proporciones óptimas"

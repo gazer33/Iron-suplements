@@ -10,6 +10,10 @@ features:
   - "Mejor flujo sanguíneo muscular"
 image: "/src/assets/images/pre.png"
 heroImage: "/src/assets/images/pre-hero.png"
+imagePositions:
+  benefits: "/src/assets/images/benefits.jpg"
+  usage: "/src/assets/images/how-to-use.jpg"
+  scientific: "/src/assets/images/evidence.jpg"
 benefits:
   - "Aumento inmediato de energía y alerta mental para entrenamientos intensos"
   - "Mejora significativa del enfoque y concentración durante el ejercicio"
