@@ -9,7 +9,11 @@ features:
   - "Acelera la recuperación entre series"
   - "Aumenta la masa muscular magra"
 image: "/src/assets/images/creatine.png"
-heroImage: "/src/assets/images/creatine-hero.png"
+heroImage: "/src/assets/images/creatine-hero.jpg"
+imagePositions:
+  benefits: "/src/assets/images/benefits.jpg"
+  usage: "/src/assets/images/how-to-use.jpg"
+  scientific: "/src/assets/images/evidence.jpg"
 benefits:
   - "Incremento significativo en la fuerza muscular y potencia explosiva"
   - "Mejora del rendimiento en entrenamientos de alta intensidad"

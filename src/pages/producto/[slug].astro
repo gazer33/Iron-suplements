@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/header/Header.astro';
 import Footer from '../../components/footer/Footer.astro';
@@ -18,8 +18,25 @@ export async function getStaticPaths() {
 const { program } = Astro.props;
 const { Content } = await program.render();
 
-// Image placeholders
-const heroImagePlaceholder = program.data.heroImage || program.data.image;
+const assetImages = import.meta.glob('../../assets/images/*.{png,jpg,jpeg,webp,avif}', { eager: true });
+
+const imageModules = Object.fromEntries(
+  Object.entries(assetImages).map(([path, asset]) => {
+    const filename = path.split('/').pop();
+    return [filename, asset.default ?? asset];
+  })
+);
+
+const resolveImage = (value?: string) => {
+  if (!value) return undefined;
+  const filename = value.split('/').pop();
+  return filename ? imageModules[filename] : undefined;
+};
+
+const heroImage = resolveImage(program.data.heroImage || program.data.image);
+const benefitsImage = resolveImage(program.data.imagePositions?.benefits);
+const usageImage = resolveImage(program.data.imagePositions?.usage);
+const scientificImage = resolveImage(program.data.imagePositions?.scientific);
 ---
 
 <BaseLayout
@@ -100,17 +117,28 @@ const heroImagePlaceholder = program.data.heroImage || program.data.image;
           <!-- Right Column: SVG + Image Placeholder -->
           <div class="hero-svg opacity-0 relative">
             <div class="relative">
-              <!-- Image Placeholder for Hero -->
               <div class="relative z-10 bg-zinc-900 rounded-2xl p-8 border-2 border-zinc-800 shadow-2xl">
-                <div class="aspect-square bg-gradient-to-br from-yellow-400/20 to-zinc-900 rounded-xl flex items-center justify-center">
-                  <div class="text-center">
-                    <div class="text-8xl mb-4">{program.data.icon}</div>
-                    <p class="text-gray-500 text-display-5">
-                      Imagen Hero del Producto<br />
-                      (heroImage placeholder)
-                    </p>
+                {heroImage ? (
+                  <div class="aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-yellow-400/10 to-zinc-900">
+                    <Image
+                      src={heroImage}
+                      alt={`${program.data.title} imagen principal`}
+                      class="h-full w-full object-cover"
+                      widths={[480, 720, 960]}
+                      sizes="(min-width: 1024px) 40vw, 90vw"
+                    />
                   </div>
-                </div>
+                ) : (
+                  <div class="aspect-square bg-gradient-to-br from-yellow-400/20 to-zinc-900 rounded-xl flex items-center justify-center">
+                    <div class="text-center">
+                      <div class="text-8xl mb-4">{program.data.icon}</div>
+                      <p class="text-gray-500 text-display-5">
+                        Imagen Hero del Producto<br />
+                        (heroImage placeholder)
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <!-- Decorative SVG Elements -->
@@ -179,19 +207,30 @@ const heroImagePlaceholder = program.data.heroImage || program.data.image;
               </ul>
             </div>
 
-            <!-- Image Placeholder -->
             <div class="order-1 lg:order-2">
-              <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8 aspect-square flex items-center justify-center">
-                <div class="text-center">
-                  <svg class="w-32 h-32 mx-auto mb-4 text-yellow-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  <p class="text-gray-500 text-display-5">
-                    Imagen de Beneficios<br />
-                    (benefits image placeholder)
-                  </p>
+              {benefitsImage ? (
+                <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl overflow-hidden aspect-square">
+                  <Image
+                    src={benefitsImage}
+                    alt={`Beneficios de ${program.data.title}`}
+                    class="h-full w-full object-cover"
+                    widths={[480, 720, 960]}
+                    sizes="(min-width: 1024px) 32rem, 100vw"
+                  />
                 </div>
-              </div>
+              ) : (
+                <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8 aspect-square flex items-center justify-center">
+                  <div class="text-center">
+                    <svg class="w-32 h-32 mx-auto mb-4 text-yellow-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <p class="text-gray-500 text-display-5">
+                      Imagen de Beneficios<br />
+                      (benefits image placeholder)
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -200,19 +239,30 @@ const heroImagePlaceholder = program.data.heroImage || program.data.image;
         {program.data.usage && (
           <section class="mb-20 animate-section">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <!-- Image Placeholder -->
               <div>
-                <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8 aspect-video flex items-center justify-center">
-                  <div class="text-center">
-                    <svg class="w-32 h-32 mx-auto mb-4 text-yellow-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                    <p class="text-gray-500 text-display-5">
-                      Imagen de Uso<br />
-                      (usage image placeholder)
-                    </p>
+                {usageImage ? (
+                  <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl overflow-hidden aspect-video">
+                    <Image
+                      src={usageImage}
+                      alt={`Cómo usar ${program.data.title}`}
+                      class="h-full w-full object-cover"
+                      widths={[480, 720, 960]}
+                      sizes="(min-width: 1024px) 32rem, 100vw"
+                    />
                   </div>
-                </div>
+                ) : (
+                  <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8 aspect-video flex items-center justify-center">
+                    <div class="text-center">
+                      <svg class="w-32 h-32 mx-auto mb-4 text-yellow-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                      <p class="text-gray-500 text-display-5">
+                        Imagen de Uso<br />
+                        (usage image placeholder)
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <!-- Usage Content -->
@@ -263,19 +313,30 @@ const heroImagePlaceholder = program.data.heroImage || program.data.image;
                 </div>
               </div>
 
-              <!-- Image Placeholder -->
               <div>
-                <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8 aspect-square flex items-center justify-center">
-                  <div class="text-center">
-                    <svg class="w-32 h-32 mx-auto mb-4 text-yellow-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <p class="text-gray-500 text-display-5">
-                      Imagen Científica<br />
-                      (scientific image placeholder)
-                    </p>
+                {scientificImage ? (
+                  <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl overflow-hidden aspect-square">
+                    <Image
+                      src={scientificImage}
+                      alt={`Respaldo científico de ${program.data.title}`}
+                      class="h-full w-full object-cover"
+                      widths={[480, 720, 960]}
+                      sizes="(min-width: 1024px) 32rem, 100vw"
+                    />
                   </div>
-                </div>
+                ) : (
+                  <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-2xl p-8 aspect-square flex items-center justify-center">
+                    <div class="text-center">
+                      <svg class="w-32 h-32 mx-auto mb-4 text-yellow-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2 2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <p class="text-gray-500 text-display-5">
+                        Imagen Científica<br />
+                        (scientific image placeholder)
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </section>
