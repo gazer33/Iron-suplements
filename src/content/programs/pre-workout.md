@@ -9,7 +9,7 @@ features:
   - "Resistencia mejorada"
   - "Mejor flujo sanguíneo muscular"
 image: "/src/assets/images/pre.png"
-heroImage: "/src/assets/images/pre-hero.png"
+heroImage: "/src/assets/images/pre.png"
 imagePositions:
   benefits: "/src/assets/images/benefits.jpg"
   usage: "/src/assets/images/how-to-use.jpg"
