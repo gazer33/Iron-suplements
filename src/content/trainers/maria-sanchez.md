@@ -1,17 +1,17 @@
 ---
-name: "María Sánchez"
-title: "Especialista en Nutrición"
+name: "Expert Trainer 2"
+title: "Nutrition Specialist"
 specialties:
-  - "Planes Nutricionales Personalizados"
-  - "Suplementación Deportiva"
-  - "Control de Peso"
-bio: "Experta en nutrición deportiva dedicada a optimizar el rendimiento a través de la alimentación"
+  - "Personalized Nutrition Plans"
+  - "Sports Supplementation"
+  - "Weight Management"
+bio: "Sports nutrition expert dedicated to optimizing performance through diet and supplementation"
 image: "/images/trainer-2.jpg"
 certifications:
-  - "Nutrióloga Certificada"
-  - "Especialista en Nutrición Deportiva"
-experience: "8+ años"
+  - "Certified Nutritionist"
+  - "Sports Nutrition Specialist"
+experience: "8+ years"
 order: 2
 ---
 
-María ayuda a nuestros clientes a alcanzar sus objetivos a través de planes nutricionales personalizados y asesoría en suplementación.
+Expert Trainer 2 helps clients reach their goals through personalized nutrition plans and supplementation guidance.

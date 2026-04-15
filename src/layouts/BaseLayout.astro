@@ -8,13 +8,13 @@ interface Props {
 
 const {
   title,
-  description = "Iron Supplements - Suplementos deportivos premium para maximizar tu rendimiento. Proteína, creatina, pre-entreno y más.",
+  description = "Supplement Store - Suplementos deportivos premium para maximizar tu rendimiento. Proteína, creatina, pre-entreno y más.",
   image = "/og-image.jpg",
   noIndex = false
 } = Astro.props;
 
 // Handle both local dev and production
-const site = Astro.site?.toString() || 'https://ironsupplements.netlify.app';
+const site = Astro.site?.toString() || 'https://your-supplement-store.com';
 const canonicalURL = new URL(Astro.url.pathname, site);
 const imageURL = new URL(image, site);
 ---
@@ -51,18 +51,18 @@ const imageURL = new URL(image, site);
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "SportsActivityLocation",
-    "name": "Iron Supplements",
+    "name": "Supplement Store",
     "description": "Tienda de suplementos deportivos premium",
     "url": site,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Av. Mirasol, Jaral",
-      "addressLocality": "Atizapán de Zaragoza",
-      "addressRegion": "Estado de México",
-      "addressCountry": "MX"
+      "streetAddress": "123 Main Street",
+      "addressLocality": "Your City",
+      "addressRegion": "Your State",
+      "addressCountry": "US"
     },
-    "telephone": "+52 55 4345 5565",
-    "email": "ironSupplements@contact.com",
+    "telephone": "+1 (555) 123-4567",
+    "email": "contact@supplementstore.com",
     "openingHours": "Tu-Su 09:00-20:00",
     "priceRange": "$$"
   })} />

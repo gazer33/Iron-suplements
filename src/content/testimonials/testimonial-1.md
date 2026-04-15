@@ -1,7 +1,7 @@
 ---
-author: "Roberto García"
-role: "Cliente desde 2023"
-content: "Los suplementos de Iron Supplements han transformado completamente mi rendimiento en el gimnasio. La calidad es excepcional y los resultados son visibles. ¡Altamente recomendado!"
+author: "Customer Name"
+role: "Customer since 2023"
+content: "The supplements from Supplement Store have completely transformed my gym performance. The quality is exceptional and the results are visible. Highly recommended!"
 rating: 5
 date: 2024-01-15
 ---

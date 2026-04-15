@@ -1,18 +1,18 @@
 ---
-name: "Carlos Rodríguez"
-title: "Entrenador Principal"
+name: "Expert Trainer 1"
+title: "Head Coach"
 specialties:
-  - "Fuerza y Acondicionamiento"
-  - "Nutrición Deportiva"
-  - "Rehabilitación"
-bio: "Con más de 10 años de experiencia ayudando a atletas y entusiastas del fitness a alcanzar sus metas"
+  - "Strength & Conditioning"
+  - "Sports Nutrition"
+  - "Rehabilitation"
+bio: "With over 10 years of experience helping athletes and fitness enthusiasts achieve their goals"
 image: "/images/trainer-1.jpg"
 certifications:
-  - "Certificado NSCA-CPT"
-  - "Nutricionista Deportivo Certificado"
-  - "Especialista en Rehabilitación"
-experience: "10+ años"
+  - "NSCA-CPT Certified"
+  - "Certified Sports Nutritionist"
+  - "Rehabilitation Specialist"
+experience: "10+ years"
 order: 1
 ---
 
-Carlos es nuestro entrenador principal con una pasión inquebrantable por el fitness y la nutrición deportiva.
+Expert Trainer 1 is our head coach with an unwavering passion for fitness and sports nutrition.
